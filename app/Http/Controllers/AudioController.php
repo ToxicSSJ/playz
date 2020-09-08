@@ -8,41 +8,77 @@ use App\Audio;
 class AudioController extends Controller
 {
 
-    /*public function show($id)
+    public function show($id)
     {
-        $data = []; //to be sent to the view
+
+        $data = [];
         $audio = Audio::findOrFail($id);
 
         if($audio == null) {
-            return redirect()->route('home.index');
+            return redirect()->route('home.audios');
         }
 
-        $data["title"] = $product->getName();
-        $data["product"] = $product;
-        $data["sizes"] = $listOfSizes;
-        return view('audio.show')->with("data",$data);
-    }*/
+        return view('audio.show', ['title' => trans('messages.audios_show_title')])->with("audio", $audio);
 
+    }
+
+    public function delete($id)
+    {
+
+        $data = [];
+        $audio = Audio::findOrFail($id);
+
+        if($audio == null) {
+            return redirect()->route('home.audios');
+        }
+
+        Audio::destroy($id);
+
+        return view('audio.list', ['title' => trans('messages.audios_delete_title')])->with("audios", Audio::all());
+
+    }
 
     public function create()
     {
-        $data = []; //to be sent to the view
+
+        $data = [];
         $data["title"] = "Create product";
         $data["products"] = Audio::all();
 
-        return view('audio.create')->with("data",$data);
+        return view('audio.create', ['title' => trans('messages.audios_create_title')])->with("data", $data);
+
+    }
+
+    public function list()
+    {
+
+        return view('audio.list', ['title' => trans('messages.audios_list_title')])->with("audios", Audio::all());
+
+    }
+
+    public function audios()
+    {
+
+        return view('home.audios', ['title' => trans('messages.audios_title')]);
+
     }
 
     public function save(Request $request)
     {
 
         $request->validate([
-            "name" => "required",
+            "title" => "required",
+            "description" => "required",
+            "type" => "required",
+            "filename" => "required",
+            "photoId" => "required",
+            "contributors" => "",
+            "categories" => "required",
             "price" => "required|numeric|gt:0"
         ]);
 
-        Audio::create($request->only(["name","price"]));
-        return back()->with('success','Item created successfully!');
+        Audio::create($request->only(['title', 'description', 'type', 'filename', 'photoId', 'contributors', 'categories', 'price']));
+        return back()->with('success','Audio created successfully!');
 
     }
 

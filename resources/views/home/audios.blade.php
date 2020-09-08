@@ -6,23 +6,21 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Audios View</div>
-
                 <div class="card-body">
-                    Vista de Audios
                     <div class="row">
                         <div class="col-md">
-                            <h4>Crear:</h4>
+                            <h4>Create:</h4>
                         </div>
                         <div class="col-md">
-                            <p>{{ route('audios.create') }}</p>
+                            <a href="{{ route('audio.create') }}"><p>Click</p></a>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md">
-                            <h4>Lista:</h4>
+                            <h4>List:</h4>
                         </div>
                         <div class="col-md">
-                            <p>{{ route('audios.list') }}</p>
+                            <a href="{{ route('audio.list') }}"><p>Click</p></a>
                         </div>
                     </div>
                 </div>

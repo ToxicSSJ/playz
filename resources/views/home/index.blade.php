@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">PlayZ Home</div>
 
                 <div class="card-body">
-                    Test
+                    Select an option from the navigation bar.
                 </div>
             </div>
         </div>

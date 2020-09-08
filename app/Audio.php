@@ -6,8 +6,44 @@ use Illuminate\Database\Eloquent\Model;
 
 class Audio extends Model
 {
-    //attributes id, name, price, created_at, updated_at
-    protected $fillable = ['name','price'];
+
+    protected $table = 'audios';
+    protected $fillable = ['id', 'title', 'description', 'type', 'filename', 'photoId', 'contributors', 'categories', 'price'];
+
+    public function getTitle() 
+    {
+        return $this->attributes['title'];
+    }
+
+    public function getDescription() 
+    {
+        return $this->attributes['description'];
+    }
+
+    public function getType() 
+    {
+        return $this->attributes['type'];
+    }
+
+    public function getFilename() 
+    {
+        return $this->attributes['filename'];
+    }
+
+    public function getPhotoId() 
+    {
+        return $this->attributes['photoId'];
+    }
+
+    public function getContributors() 
+    {
+        return $this->attributes['contributors'];
+    }
+
+    public function getCategories() 
+    {
+        return $this->attributes['categories'];
+    }
 
     public function getId()
     {
@@ -17,16 +53,6 @@ class Audio extends Model
     public function setId($id)
     {
         $this->attributes['id'] = $id;
-    }
-
-    public function getName()
-    {
-        return $this->attributes['name'];
-    }
-
-    public function setName($name)
-    {
-        $this->attributes['name'] = $name;
     }
 
     public function getPrice()
