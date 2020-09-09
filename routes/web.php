@@ -47,3 +47,7 @@ Route::get('/product/show/{id}', 'ProductController@show')->name("product.show")
 Route::get('/product/create', 'ProductController@create')->name("product.create");
 Route::get('/product/saved/{id}', 'ProductController@saved')->name("product.saved");
 Route::post('/product/save', 'ProductController@save')->name("product.save");
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
