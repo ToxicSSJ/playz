@@ -1,3 +1,7 @@
+:root {
+    --main-text-color: #f77062;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -99,7 +103,7 @@
     border: none;
     outline: none;
     border-radius: 4px;
-    background: #f77062;
+    background: var(--main-text-color);
     color: #fff;
 }
 
@@ -109,12 +113,12 @@
 }
 
 .navbar__links:hover {
-    color: #f77062;
+    color: var(--main-text-color);
     transition: all 0.3s ease;
 }
 
 .navbar__links__dropdown:hover {
-    color: #f77062;
+    color: var(--main-text-color);
     transition: all 0.3s ease;
 }
 
@@ -276,7 +280,11 @@
 
 .main__btn {
     font-size: 1rem;
-    background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
+    background-image: linear-gradient(
+        to top,
+        var(--main-text-color) 0%,
+        #fe5196 100%
+    );
     padding: 14px 32px;
     border: none;
     border-radius: 4px;
@@ -460,7 +468,7 @@
     border: none;
     outline: none;
     border-radius: 4px;
-    background: #f77062;
+    background: var(--main-text-color);
     position: absolute;
     top: 440px;
     left: 30px;
