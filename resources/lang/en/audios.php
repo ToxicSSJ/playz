@@ -4,6 +4,7 @@ return [
 
     'audio' => 'Audio',
     'audios' => 'Audios',
+    'home' => 'Home',
     'find' => 'Find',
     'upload' => 'Upload',
     'select' => 'Select File',

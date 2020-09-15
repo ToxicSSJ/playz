@@ -1,3 +1,7 @@
+:root {
+    --main-text-color: #f77062;
+}
+
 body {
     background: #141414;
 }
@@ -35,7 +39,7 @@ body {
     color: #333;
 }
 .profile-head h6 {
-    color: #0062cc;
+    color: var(--main-text-color);
 }
 .profile-edit-btn {
     border: none;
@@ -65,7 +69,7 @@ body {
 }
 .profile-head .nav-tabs .nav-link.active {
     border: none;
-    border-bottom: 2px solid #0062cc;
+    border-bottom: 2px solid var(--main-text-color);
 }
 .profile-work {
     padding: 14%;
@@ -91,5 +95,13 @@ body {
 }
 .profile-tab p {
     font-weight: 600;
-    color: #0062cc;
+    color: var(--main-text-color);
+}
+
+.nav-tab {
+    color: var(--main-text-color);
+}
+
+.nav-tab:hover {
+    color: coral;
 }
