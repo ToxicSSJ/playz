@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,8 +35,71 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput-typeahead.css" integrity="sha512-wu4jn1tktzX0SHl5qNLDtx1uRPSj+pm9dDgqsrYUS16AqwzfdEmh1JR8IQL7h+phL/EAHpbBkISl5HXiZqxBlQ==" crossorigin="anonymous" />
     
 </head>
+
 <body>
     <div id="app">
+
+        <!-- NAV SUPERIOR LOGO -->
+        <nav class="navbar navbar-default navbar-expand-lg">
+            <div class="mx-auto my-2 order-0 order-md-1">
+                <a class="mx-auto navbar-brand" href="http://localhost:5000/">
+                    <img class="logo-img" src="img/nav/logo.svg" loading="lazy" />
+                </a>
+            </div>
+        </nav>
+
+        <!-- NAV INFERIOR -->
+        <nav class="navbar navbar-default navbar-down navbar-expand-lg">
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar2" aria-controls="collapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <div class="navbar-collapse collapse" id="collapsingNavbar2">
+                <ul class="navbar-nav mx-auto text-md-center text-center">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Nuevo</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="http://localhost:5000/">
+                            Inicio
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:5000/mujeres">
+                            Mujer
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:5000/hombres">
+                            Hombre
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Niño</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/login">
+                            <img class="login-icon" src="/img/nav/profile.svg">
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="cart"><img class="login-icon" src="/img/nav/cart.svg">
+                            <span id="cart_menu_num" data-action="cart-can" class="badge rounded-circle"> 0 </span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+
+
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -55,14 +119,14 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                        @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </li>
+                        @endif
                         @else
                             <li class="nav-item">
                                 <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -84,9 +148,8 @@
                                     {{ Auth::user()->name }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
