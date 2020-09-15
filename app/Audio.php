@@ -8,7 +8,12 @@ class Audio extends Model
 {
 
     protected $table = 'audios';
-    protected $fillable = ['id', 'title', 'description', 'type', 'audio_file', 'cover_image', 'contributors', 'categories', 'price'];
+    protected $fillable = ['id', 'author_id', 'title', 'description', 'type', 'audio_file', 'cover_image', 'contributors', 'categories', 'price'];
+
+    public function getAuthorId()
+    {
+        return $this->attributes['author_id'];
+    }
 
     public function getTitle() 
     {
