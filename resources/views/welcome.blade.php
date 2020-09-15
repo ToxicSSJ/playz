@@ -54,9 +54,7 @@
                     <li class="navbar__btn"><a href="{{ route('register') }}" class="button">Sign Up</a></li>
                     @endif
                     @endauth
-
                     @endif
-
                 </ul>
             </div>
         </nav>
