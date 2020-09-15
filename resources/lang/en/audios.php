@@ -9,6 +9,7 @@ return [
     'upload' => 'Upload',
     'select' => 'Select File',
     'hire' => 'Hire',
+    'play' => 'Play',
 
     'name' => 'Name',
     'title' => 'Title',
