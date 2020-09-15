@@ -70,7 +70,7 @@
                         <a href="/" class="navbar__links">{{ __('audios.home') }}</a>
                     </li>
                     <li class="navbar__item">
-                        <a href="/" class="navbar__links">{{ __('audios.find') }}</a>
+                        <a href="{{ route('find') }}" class="navbar__links">{{ __('audios.find') }}</a>
                     </li>
                     <li class="navbar__item">
                         <a href="{{ route('upload') }}" class="navbar__links">{{ __('audios.upload') }}</a>
