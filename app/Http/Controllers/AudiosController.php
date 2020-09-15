@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Audio;
+use App\User;
 use Auth;
 
 class AudiosController extends Controller
@@ -25,7 +26,17 @@ class AudiosController extends Controller
         error_log('test');
         if($request->has('title')){
             error_log('LEL');
-            return Audio::where('title', 'like','%'.$request->input('title').'%')->get();
+            $data = Audio::where('title', 'like','%'.$request->input('title').'%')->get();
+
+            foreach($data as $audio) {
+                $audio->cover_image = Storage::url($audio->getCoverImage());
+                $audio->audio_file = Storage::url($audio->getAudioFile());
+                $audio->author_name = User::findOrFail($audio->getAuthorId())->name;
+                error_log($audio->cover_image);
+            }
+
+            return $data;
+
         }
     }
 

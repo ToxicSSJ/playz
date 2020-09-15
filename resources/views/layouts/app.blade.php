@@ -36,7 +36,8 @@
     <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"></link>
     <!-- Custom CSS-->
     <link rel="stylesheet" href="/css/index.css">
-    
+    <link rel="stylesheet" href="{{ asset('css/player/stickyaudioplayerjquery.min.css') }}">
+
 </head>
 
 <body>
@@ -61,13 +62,13 @@
                     @endif
                     @else
                     <li class="navbar__item">
-                        <a href="/" class="navbar__links">{{ __('audios.find') }}</a>
+                        <a href="{{ route('find') }}" class="navbar__links">{{ __('audios.find') }}</a>
                     </li>
                     <li class="navbar__item">
                         <a href="{{ route('upload') }}" class="navbar__links">{{ __('audios.upload') }}</a>
                     </li>
                     <li class="navbar__item">
-                        <a href="{{ route('upload') }}" class="navbar__links">{{ __('audios.hire') }}</a>
+                        <a href="{{ route('hire') }}" class="navbar__links">{{ __('audios.hire') }}</a>
                     </li>
                     <li class="nav-item dropdown ">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle navbar__links" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -101,12 +102,12 @@
 </body>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js" integrity="sha512-9UR1ynHntZdqHnwXKTaOm1s6V9fExqejKvg5XMawEMToW4sSw+3jtLrYfZPijvnwnnE8Uol1O9BcAskoxgec+g==" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-migrate-3.0.0.js"></script>
+<script src="{{ asset('js/player/stickyaudioplayerjquery.min.js') }}"></script>
 
 @yield('scripts')
 
