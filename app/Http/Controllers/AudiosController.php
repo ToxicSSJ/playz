@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Audio;
+use Auth;
 
 class AudiosController extends Controller
 {
@@ -63,7 +64,10 @@ class AudiosController extends Controller
     public function save(Request $request)
     {
 
-        error_log('tick');
+        error_log('tick ' . Auth::check());
+
+        if(!Auth::check())
+            return back()->with('error','Login before upload!');
 
         $request->validate([
             "title" => "required",
@@ -82,11 +86,20 @@ class AudiosController extends Controller
         $coverPath = $this->saveFile($request, 'image', 'public/covers');
         $audioPath = $this->saveFile($request, 'audio', 'public/audios');
 
-        $newAudio = Audio::create($request->only(['title', 'description', 'type', 'contributors', 'categories', 'price']));
-        $newAudio->cover_image = $coverPath;
-        $newAudio->audio_file = $audioPath;
+        $newAudio = Audio::create([
 
-        $newAudio->save();
+            'title' => $request->get('title'),
+            'description' => $request->get('description'),
+            'type' => $request->get('type'),
+            'contributors' => $request->get('contributors'),
+            'categories' => $request->get('categories'),
+            'price' => $request->get('price'),
+
+            'author_id' => Auth::user()->getId(),
+            'audio_file' => $audioPath,
+            'cover_image' => $coverPath
+
+        ]);
         
         return back()->with('success','Audio created successfully!');
 

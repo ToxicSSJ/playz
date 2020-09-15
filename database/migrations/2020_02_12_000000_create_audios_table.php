@@ -14,7 +14,9 @@ class CreateAudiosTable extends Migration
     public function up()
     {
         Schema::create('audios', function (Blueprint $table) {
+
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('author_id');
             $table->text('title');
             $table->text('description');
             $table->enum('type', ['Audio', 'Song', 'MIDI'])->default('Audio');
@@ -24,6 +26,9 @@ class CreateAudiosTable extends Migration
             $table->text('categories');
             $table->integer('price');
             $table->timestamps();
+
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 

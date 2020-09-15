@@ -100,7 +100,7 @@
               <div id="test-l-3" role="tabpanel" class="bs-stepper-pane text-center" aria-labelledby="stepper1trigger3">
                 <div class="form-group">
                     <label for="inputType">Upload Audio File</label>
-                    <input type="file" name="audio" class="form-control" accept=".mp3, .wmv, .mid" />
+                    <input type="file" name="audio" class="form-control" accept=".mp3, .mid" />
                 </div>
                 <button type="button" class="btn btn-primary" onclick="stepper.previous()">Previous</button>
                 <button type="button" class="btn btn-primary" onclick="stepper.next()">Next</button>
