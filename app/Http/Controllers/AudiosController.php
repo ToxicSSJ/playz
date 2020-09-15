@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Audio;
+use App\User;
 use Auth;
 
 class AudiosController extends Controller
@@ -13,16 +14,7 @@ class AudiosController extends Controller
 
     public function finder()
     {
-
-        $data = [];
-        $audio = Audio::findOrFail($id);
-
-        if($audio == null) {
-            return redirect()->route('home.audios');
-        }
-
-        return view('audio.show', ['title' => trans('messages.audios_show_title')])->with("audio", $audio);
-
+        return view('audios.finder');
     }
 
     public function upload()
@@ -30,35 +22,22 @@ class AudiosController extends Controller
         return view('audios.upload');
     }
 
-    public function uploadAudio(Request $request)
-    {
+    public function getAutocompleteData(Request $request){
+        error_log('test');
+        if($request->has('title')){
+            error_log('LEL');
+            $data = Audio::where('title', 'like','%'.$request->input('title').'%')->get();
 
-        $request->validate([
-            "title" => "required",
-            "description" => "required",
-            "type" => "required",
-            "filename" => "required",
-            "photoId" => "required",
-            "contributors" => "",
-            "categories" => "required",
-            "price" => "required|numeric|gt:0"
-        ]);
+            foreach($data as $audio) {
+                $audio->cover_image = Storage::url($audio->getCoverImage());
+                $audio->audio_file = Storage::url($audio->getAudioFile());
+                $audio->author_name = User::findOrFail($audio->getAuthorId())->name;
+                error_log($audio->cover_image);
+            }
 
-        Audio::create($request->only(['title', 'description', 'type', 'filename', 'photoId', 'contributors', 'categories', 'price']));
-        return back()->with('success','Audio created successfully!');
+            return $data;
 
-    }
-
-    public function saveFile(Request $request, $name, $spath) {
-
-        $filenameWithExt = $request->file($name)->getClientOriginalName();
-        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-        $extension = $request->file($name)->getClientOriginalExtension();
-        $fileNameToStore = $filename.'_'.time().'.'.$extension;
-
-        $path = $request->file($name)->storeAs($spath, $fileNameToStore);
-        return $path;
-
+        }
     }
 
     public function save(Request $request)
@@ -102,6 +81,19 @@ class AudiosController extends Controller
         ]);
         
         return back()->with('success','Audio created successfully!');
+
+    }
+
+    public function saveFile(Request $request, $name, $spath) 
+    {
+
+        $filenameWithExt = $request->file($name)->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file($name)->getClientOriginalExtension();
+        $fileNameToStore = $filename.'_'.time().'.'.$extension;
+
+        $path = $request->file($name)->storeAs($spath, $fileNameToStore);
+        return $path;
 
     }
 
