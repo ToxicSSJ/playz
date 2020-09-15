@@ -13,16 +13,7 @@ class AudiosController extends Controller
 
     public function finder()
     {
-
-        $data = [];
-        $audio = Audio::findOrFail($id);
-
-        if($audio == null) {
-            return redirect()->route('home.audios');
-        }
-
-        return view('audio.show', ['title' => trans('messages.audios_show_title')])->with("audio", $audio);
-
+        return view('audios.finder');
     }
 
     public function upload()
@@ -30,35 +21,12 @@ class AudiosController extends Controller
         return view('audios.upload');
     }
 
-    public function uploadAudio(Request $request)
-    {
-
-        $request->validate([
-            "title" => "required",
-            "description" => "required",
-            "type" => "required",
-            "filename" => "required",
-            "photoId" => "required",
-            "contributors" => "",
-            "categories" => "required",
-            "price" => "required|numeric|gt:0"
-        ]);
-
-        Audio::create($request->only(['title', 'description', 'type', 'filename', 'photoId', 'contributors', 'categories', 'price']));
-        return back()->with('success','Audio created successfully!');
-
-    }
-
-    public function saveFile(Request $request, $name, $spath) {
-
-        $filenameWithExt = $request->file($name)->getClientOriginalName();
-        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-        $extension = $request->file($name)->getClientOriginalExtension();
-        $fileNameToStore = $filename.'_'.time().'.'.$extension;
-
-        $path = $request->file($name)->storeAs($spath, $fileNameToStore);
-        return $path;
-
+    public function getAutocompleteData(Request $request){
+        error_log('test');
+        if($request->has('title')){
+            error_log('LEL');
+            return Audio::where('title', 'like','%'.$request->input('title').'%')->get();
+        }
     }
 
     public function save(Request $request)
@@ -102,6 +70,19 @@ class AudiosController extends Controller
         ]);
         
         return back()->with('success','Audio created successfully!');
+
+    }
+
+    public function saveFile(Request $request, $name, $spath) 
+    {
+
+        $filenameWithExt = $request->file($name)->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file($name)->getClientOriginalExtension();
+        $fileNameToStore = $filename.'_'.time().'.'.$extension;
+
+        $path = $request->file($name)->storeAs($spath, $fileNameToStore);
+        return $path;
 
     }
 
