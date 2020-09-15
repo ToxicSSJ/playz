@@ -17,10 +17,10 @@ class CreateAudiosTable extends Migration
             $table->bigIncrements('id');
             $table->text('title');
             $table->text('description');
-            $table->text('type');
-            $table->text('filename');
-            $table->integer('photoId');
-            $table->text('contributors');
+            $table->enum('type', ['Audio', 'Song', 'MIDI'])->default('Audio');
+            $table->text('audio_file')->nullable();
+            $table->text('cover_image')->nullable();
+            $table->text('contributors')->nullable();
             $table->text('categories');
             $table->integer('price');
             $table->timestamps();

@@ -20,3 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/profile', 'ProfileController@profile')->name('profile');
+
+Route::get('/upload', 'AudiosController@upload')->name('upload');
+
+Route::post('/save', 'AudiosController@save')->name('save');
+
+Route::get('/test', 'Audio\AudioController@test')->name('test');
