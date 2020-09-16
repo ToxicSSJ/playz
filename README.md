@@ -36,6 +36,7 @@ cmder will be refered as console
 - Run `php artisan key:generate` 
 - Run `php artisan migrate`
 - Run `php artisan db:seed` to run seeders, if any.
+- Run `php artisan storage:link`.
 - Run `php artisan serve`
 
 #### You can now access your project at `localhost:8000` :)
