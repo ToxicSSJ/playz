@@ -45,21 +45,20 @@
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <div class="row">
 
-                            
-
-                        @foreach($audios as $audio)
-                        <div class="card">
-                                <img class="card-img-top" src="/img/profile/avatar.png" height="300" width="50" alt="Card image cap">
+                            @foreach($audios as $audio)
+                            <div class="card">
+                                <img class="card-img-top" src="{{ Storage::url($audio->cover_image) }}" height="300" width="50" alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $audio->title }}</h5>
                                     <p class="card-text">{{ $audio->description }}.</p>
                                     <a href="#" class="btn btn-primary">Go somewhere</a>
                                 </div>
                             </div>
+                            <br>
+                            @endforeach
                         </div>
-                        @endforeach
 
-                        
+
                     </div>
 
                 </div>
