@@ -75,8 +75,7 @@
 
             },
             source: function(request, response) {
-                $.getJSON('{{ route('
-                    api.audios ') }}?title=' + request.term,
+                $.getJSON('{{ route('api.audios') }}?title=' + request.term,
                     function(data) {
 
                         var array = $.map(data, function(row) {
