@@ -22,10 +22,10 @@ class AudiosController extends Controller
         return view('audios.upload');
     }
 
-    public function getAutocompleteData(Request $request){
-        error_log('test');
+    public function getAutocompleteData(Request $request) {
+
         if($request->has('title')){
-            error_log('LEL');
+
             $data = Audio::where('title', 'like','%'.$request->input('title').'%')->get();
 
             foreach($data as $audio) {
@@ -38,12 +38,11 @@ class AudiosController extends Controller
             return $data;
 
         }
+
     }
 
     public function save(Request $request)
     {
-
-        error_log('tick ' . Auth::check());
 
         if(!Auth::check())
             return back()->with('error','Login before upload!');
@@ -94,6 +93,29 @@ class AudiosController extends Controller
 
         $path = $request->file($name)->storeAs($spath, $fileNameToStore);
         return $path;
+
+    }
+
+    public function getBundles() {
+
+        $data = AudioBundle::all();
+        return $data;
+
+    }
+
+    public function getInfos($bundle) {
+
+        $data = AudioInfo::where('', 'equals','')->get();
+
+        foreach($data as $audio) {
+            
+            $audio->cover_image = Storage::url($audio->getCoverImage());
+            $audio->audio_file = Storage::url($audio->getAudioFile());
+            $audio->author_name = User::findOrFail($audio->getAuthorId())->name;
+
+        }
+
+        return $data;
 
     }
 
