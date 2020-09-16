@@ -76,7 +76,7 @@
                         <a href="{{ route('upload') }}" class="navbar__links">{{ __('audios.upload') }}</a>
                     </li>
                     <li class="navbar__item">
-                        <a href="{{ route('hire') }}" class="navbar__links">{{ __('audios.hire') }}</a>
+                        <a href="{{ route('bundles') }}" class="navbar__links">{{ __('bundles.bundles') }}</a>
                     </li>
                     <li class="nav-item dropdown ">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle navbar__links" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
