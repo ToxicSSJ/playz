@@ -22,7 +22,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/profile', 'ProfileController@profile')->name('profile');
-Route::get('/user/{id}', 'UserController@show')->name('users.show');
 
 Route::get('/upload', 'AudiosController@upload')->name('upload');
 Route::get('/find', 'AudiosController@finder')->name('find');
@@ -35,3 +34,4 @@ Route::post('/save', 'AudiosController@save')->name('save');
 Route::get('/api/audios', 'AudiosController@getAutocompleteData')->name('api.audios');
 
 Route::get('/test', 'Audio\AudioController@test')->name('test');
+Route::get('/user/{id}', 'UserController@show')->name('users.show');
