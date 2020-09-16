@@ -9,9 +9,16 @@ use App\Audio;
 class ProfileController extends Controller
 {
 
-    public function profile()
+    public function __construct()
     {
-        return view('profile');
+        $this->middleware('auth');
     }
 
+    public function profile()
+    {
+        $audios = Audio::all();
+        return view('profile', [
+            'audios' => $audios,
+        ]);
+    }
 }
