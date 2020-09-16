@@ -67,7 +67,7 @@
                     @endif
                     @else
                     <li class="navbar__item">
-                        <a href="/" class="navbar__links">{{ __('audios.home') }}</a>
+                        <a href="{{ route('home') }}" class="navbar__links">{{ __('audios.home') }}</a>
                     </li>
                     <li class="navbar__item">
                         <a href="{{ route('find') }}" class="navbar__links">{{ __('audios.find') }}</a>
