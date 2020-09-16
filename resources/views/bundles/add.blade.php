@@ -19,7 +19,7 @@
             <div class="step" data-target="#test-l-1">
               <button type="button" class="step-trigger" role="tab" id="stepper1trigger1" aria-controls="test-l-1">
                 <span class="bs-stepper-circle">1</span>
-                <span class="bs-stepper-label">Information</span>
+                <span class="bs-stepper-label">Bundle Information</span>
               </button>
             </div>
             <div class="bs-stepper-line"></div>
@@ -33,7 +33,7 @@
             <div class="step" data-target="#test-l-3">
               <button type="button" class="step-trigger" role="tab" id="stepper1trigger3" aria-controls="test-l-3">
                 <span class="bs-stepper-circle">3</span>
-                <span class="bs-stepper-label">Upload</span>
+                <span class="bs-stepper-label">Select</span>
               </button>
             </div>
             <div class="bs-stepper-line"></div>
@@ -46,7 +46,7 @@
         </div>
         <div class="bs-stepper-content">
             <!-- your steps content here -->
-            <form action="{{ route('save') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('bundle.save') }}" method="post" enctype="multipart/form-data">
               @csrf
               <div id="test-l-1" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger1">
                 <div class="form-group">
@@ -61,32 +61,6 @@
                   <label for="inputPrice">Price</label>
                   <input name="price" type="number" class="form-control" id="inputPrice" value="{{ old('price') }}" placeholder="Enter price in USD">
                 </div>
-                <div class="form-group">
-                  <label for="inputType">Contributors</label><br/>
-                  <input data-role="tagsinput" class="form-control" name="contributors" type="contributors" class="form-control" id="inputContributors" value="{{ old('contributors') }}" placeholder="Enter a contributor and press enter">
-                </div>
-                <div class="form-group">
-                    <label for="inputType">Type</label>
-                    <select name="type" class="form-control" id="inputType">
-                        <option>Audio</option>
-                        <option>Song</option>
-                        <option>MIDI</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="inputType">Categories</label>
-                    <select id="categories" class="selectpicker form-control" name="categories" multiple data-live-search="true" multiple title="Choose any of the following...">
-                        <option>Sound Effect</option>
-                        <option>Pop</option>
-                        <option>Rock</option>
-                        <option>Urban</option>
-                        <option>Synth</option>
-                        <option>Piano</option>
-                        <option>Electronic</option>
-                        <option>Ambient</option>
-                        <option>Other</option>
-                    </select>
-                </div>
                 <button type="button" class="btn btn-primary" onclick="stepper.next()">Next</button>
               </div>
               <div id="test-l-2" role="tabpanel" class="bs-stepper-pane text-center" aria-labelledby="stepper1trigger2">
@@ -99,8 +73,12 @@
               </div>
               <div id="test-l-3" role="tabpanel" class="bs-stepper-pane text-center" aria-labelledby="stepper1trigger3">
                 <div class="form-group">
-                    <label for="inputType">Upload Audio File</label>
-                    <input type="file" name="audio" class="form-control" accept=".mp3, .mid" />
+                    <label for="inputType">Select Audios</label>
+                    <select id="audios" class="selectpicker form-control" name="audios[]" multiple data-live-search="true" multiple title="Choose any of the following...">
+                        @foreach($audios as $audio)
+                          <option value="{{ $audio->getId() }}">{{ $audio->getTitle() }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <button type="button" class="btn btn-primary" onclick="stepper.previous()">Previous</button>
                 <button type="button" class="btn btn-primary" onclick="stepper.next()">Next</button>
