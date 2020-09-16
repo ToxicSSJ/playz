@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Audio;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Console\StorageLinkCommand;
 
 class ProfileController extends Controller
 {
@@ -16,7 +18,7 @@ class ProfileController extends Controller
 
     public function profile()
     {
-        $audios = Audio::all();
+        $audios = Audio::where('author_id', Auth::user()->id)->get();
         return view('profile', [
             'audios' => $audios,
         ]);
