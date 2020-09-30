@@ -28,5 +28,30 @@
             </div>
         </div>
     </div>
+    <br />
+    <div>
+        <h2>Últimos Bundles</h2>
+        @foreach($bundles->sortBy('id')->chunk(3) as $chunk)
+        <div class="row p-5">
+            @foreach($chunk as $bundle)
+                <div class="col d-flex d-table align-items-stretch align-middle">
+                    <div class="card d-table-cell " style="width: 18rem;">
+                        <img class="card-img-top" src="{{ Storage::url($bundle->getCoverImage()) }}" alt="Card image cap">
+                        <div class="card-body">
+                            <h4>{{ $bundle->getTitle() }}</h4>
+                            </small></p>
+                            <p class="card-text m-0"><small class="text-muted">Author: {{ $bundle->author()->first()->getName() }}</small></p>
+                            <p class="card-text m-0"><small class="text-muted">Precio: {{ $bundle->getPrice() }} USD</small></p>
+                            <div class="card-body">
+                                <a href="{{route('bundle.show', $bundle->getId())}}" class="btn btn-success">See More</a>
+                                <a href="#" class="btn btn-primary">Agregar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        @endforeach
+    </div>
 </div>
 @endsection

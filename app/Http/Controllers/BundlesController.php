@@ -13,6 +13,29 @@ use Auth;
 class BundlesController extends Controller
 {
 
+    public function show($id)
+    {
+
+        $data = [];
+        $bundle = AudioBundle::findOrFail($id);
+
+        if($bundle == null) {
+            return redirect()->route('home.bundles');
+        }
+
+        $audios = collect([]);
+
+        foreach($bundle->infos()->get() as $info) {
+            
+            error_log($info->audio()->get()->first()->getId());
+            $audios->push($info->audio()->get()->first());
+
+        }
+
+        return view('bundles.show', ['title' => trans('messages.audios_show_title')])->with("bundle", $bundle)->with("audios", $audios);
+
+    }
+
     public function bundles()
     {
 

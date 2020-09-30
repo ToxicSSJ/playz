@@ -248,7 +248,7 @@
     -ms-border-radius: 3px;
 }
 .stickyAudioPlayerBox .player-data .bar-tile {
-    background: #e28248;
+    background: #ff0844;
     color: white;
     display: none;
     position: absolute;
@@ -266,7 +266,7 @@
 }
 .stickyAudioPlayerBox .player-data .bar-main .bar-progress,
 .stickyAudioPlayerBox .player-volume .bar-main .bar-progress {
-    background-color: #e28248;
+    background-color: #ff0844;
     height: 14px;
     margin: 2px;
     width: 0%;
@@ -554,7 +554,7 @@
 }
 .stickyAudioPlayerBoxcompact .player-data .bar-main .bar-progress,
 .stickyAudioPlayerBoxcompact .player-volume .bar-main .bar-progress {
-    background-color: #e28248;
+    background-color: #ff0844;
     height: 14px;
     margin: 2px;
     width: 0%;

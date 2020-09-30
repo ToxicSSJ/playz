@@ -1,22 +1,41 @@
 @extends('layouts.app')
 
 @section('content')
-<link href="{{ asset('css/finder.css') }}" rel="stylesheet">
+<link href="{{ asset('css/show.css') }}" rel="stylesheet">
 
 <div class="container">
+    <div class="jumbotron">
+    <div class="container text-center text-lg-left">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1 class="display-4">{{ $bundle->getTitle() }}</h1>
+                <div>
+                    <p class="text-muted mr-7 pr-7 d-inline-block">Author: <a href="{{ route('users.show', $bundle->author()->first()->getId()) }}">{{ $bundle->author()->first()->getName() }}</a></p>,
+                    <p class="text-muted d-inline-block">Price: {{ $bundle->getPrice() }} USD</p>
+                </div>
+                <p class="lead">{{ $bundle->getDescription() }}</p>
+                <div class="row justify-content-left">
+                    <span class="floatybox mr-3 d-inline-block">
+                        <a class="btn btn-primary btn-lg w-100" href="#" role="button">Buy</a>
+                        <p class="text-muted">No credit card required</p>
+                    </span>
+                    <span class="floatybox d-inline-block">
+                        <a class="btn btn-success btn-lg w-100" href="javascript:void(0)" role="button">Play</a>
+                        <p class="text-muted"></p>
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-4 align-items-bottom d-flex">
+                <div class="col-12">
+                    <img src="{{ Storage::url($bundle->getCoverImage()) }}" alt="" class="img-fluid">
+                    <p class="card-text m-0"><small class="text-muted">Released: {{ strtoupper(\Carbon\Carbon::parse($bundle->created_at)->format('d M, Y')) }}</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card-body">
-
-                @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-                @endif
-
-                <div class="form-group">
-                    <input id="audio_title" name="audio_title" type="text" class="form-control" placeholder="Enter audio or song title">
-                </div>
 
             </div>
         </div>
@@ -24,12 +43,12 @@
     <div id="results"></div>
     <br />
     <div>
-        <h2>Últimos Audios</h2>
+        <h2>This package includes</h2>
         @foreach($audios->sortBy('id')->chunk(3) as $chunk)
         <div class="row p-5">
             @foreach($chunk as $audio)
-                <div class="col d-flex d-table align-items-stretch align-middle">
-                    <div class="card d-table-cell " style="width: 18rem;">
+                <div class="col d-flex align-top align-items-stretch">
+                    <div class="card" style="width: 18rem;">
                         <img class="card-img-top" src="{{ Storage::url($audio->getCoverImage()) }}" alt="Card image cap">
                         <div class="card-body">
                             <h4>{{ $audio->getTitle() }}</h4>
@@ -41,7 +60,7 @@
                             <div class="card-body">
                                 <a href="javascript:void(0)" onclick="return play('{{ Storage::url($audio->cover_image) }}', '{{ Storage::url($audio->audio_file) }}', '{{ $audio->author()->first()->getName() }}', '{{ $audio->getTitle() }}');" class="btn btn-secondary">Play</a>
                                 <a href="#" class="btn btn-primary">Agregar</a>
-                                <a href="{{route('show.audio', $audio->getId())}}" class="btn btn-warning mt-1">See More</a>
+                                <a href="{{route('show.audio', $audio->getId())}}" class="btn mt-1 btn-warning">See More</a>
                             </div>
                         </div>
                     </div>

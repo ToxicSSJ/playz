@@ -15,9 +15,9 @@ class AudioBundle extends Model
         return $this->belongsTo(User::class, 'author_id', 'id');
     }
 
-    public function audios()
+    public function infos()
     {
-        return $this->hasOneOrMany(Audio::class, 'audios_id', 'id');
+        return $this->hasMany(AudioInfo::class, 'bundle_id', 'id');
     }
 
     public function getTitle() 
