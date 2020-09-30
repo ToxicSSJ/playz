@@ -9,9 +9,7 @@
 <!-- Custom CSS-->
 <link rel="stylesheet" href="/css/index.css">
 
-
 <div class="flex-center position-ref full-height">
-
     <!-- Hero Section -->
     <div class="main">
         <div class="main__container">
