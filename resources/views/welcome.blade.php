@@ -16,7 +16,6 @@
                 <h2>CREATIVITY FLOW</h2>
                 <p>See what make us different.</p>
                 <button class="main__btn"><a href="#">Get Started</a></button>
-
             </div>
             <div class="main__img--container">
                 <img id="main__img" src="/img/index/pic1.svg" />
@@ -26,21 +25,20 @@
 
 
     <!-- Services Section -->
+    @isset($audios)
     <div class="services">
         <h1>See what the hype is about</h1>
         <div class="services__container">
-            <div class="services__card">
-                <h2>Experience Bliss</h2>
-                <p>AI Powered technology</p>
-                <button>Get Started</button>
-            </div>
-            <div class="services__card">
-                <h2>Are you Ready?</h2>
-                <p>Take the leap</p>
-                <button>Get Started</button>
-            </div>
+            @foreach($audios as $audio)
+                <div class="services__card" style="background-image: linear-gradient( to bottom, rgba(0, 0, 0, 0) 0%, rgba(17, 17, 17, 0.6) 100% ), url({{ Storage::url($audio->cover_image) }});">
+                    <h2>{{ $audio->getTitle() }}</h2>
+                    <p>{{ $audio->getDescription() }}</p>
+                    <a href="{{route('show.audio', $audio->getId())}}"><button>{{ __('audios.see_more') }}</button></a>
+                </div>
+            @endforeach
         </div>
     </div>
+    @endisset
 
 </div>
 @endsection

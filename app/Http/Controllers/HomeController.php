@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Audio;
+
 class HomeController extends Controller
 {
     /**
@@ -23,6 +25,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+
+        $audios = Audio::all();
+        $date = \Carbon\Carbon::now();
+
+        $audios = $audios->sortBy('created_at')->reverse()->slice(0, 2);
+        return view('welcome')->with('audios', $audios);
+        
     }
 }
