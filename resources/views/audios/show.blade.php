@@ -63,7 +63,7 @@
                             <p class="card-text m-0"><small class="text-muted">Tipo: {{ $audio->getType() }}</small></p>
                             <div class="card-body">
                                 <a href="javascript:void(0)" onclick="return play('{{ Storage::url($audio->cover_image) }}', '{{ Storage::url($audio->audio_file) }}', '{{ $audio->author()->first()->getName() }}', '{{ $audio->getTitle() }}');" class="btn btn-secondary">Play</a>
-                                <a href="#" class="btn btn-primary">Agregar</a>
+                                <a href="#" class="btn btn-primary">Add to cart</a>
                                 <a href="{{route('show.audio', $audio->getId())}}" class="btn mt-1 btn-warning">See More</a>
                             </div>
                         </div>

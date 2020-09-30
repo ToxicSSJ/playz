@@ -37,7 +37,7 @@
                             <p class="card-text m-0"><small class="text-muted">Precio: {{ $bundle->getPrice() }} USD</small></p>
                             <div class="card-body">
                                 <a href="{{route('bundle.show', $bundle->getId())}}" class="btn btn-success">See More</a>
-                                <a href="#" class="btn btn-primary">Agregar</a>
+                                <a href="#" class="btn btn-primary">Add to cart</a>
                             </div>
                         </div>
                     </div>
