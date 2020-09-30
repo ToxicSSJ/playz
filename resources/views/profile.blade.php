@@ -17,6 +17,7 @@
                         {{ Auth::user()->name }}
                     </h5>
                     <h6>
+                        {{ Auth::user()->audios()->first() }}
                         Dj with Love
                     </h6>
                     <p class="proile-rating">WALLET: <span>${{ Auth::user()->wallet }}</span></p>

@@ -26,7 +26,7 @@ class BundlesController extends Controller
             return back()->with('error','Cannot access to user bundles.');
         }
 
-        $userAudios = Audio::where('id', '=', Auth::user()->getId())->get();
+        $userAudios = Auth::user()->audios()->get();
         return view('bundles.add')->with('audios', $userAudios);
     }
 
@@ -49,16 +49,18 @@ class BundlesController extends Controller
         $cover = $request->file('image');
         $coverPath = $this->saveFile($request, 'image', 'public/covers');
 
-        $newBundle = AudioBundle::create([
+        $newBundle = new AudioBundle([
 
             'title' => $request->get('title'),
             'description' => $request->get('description'),
             'price' => $request->get('price'),
 
-            'author_id' => Auth::user()->getId(),
             'cover_image' => $coverPath
 
         ]);
+
+        $newBundle->author()->associate(Auth::user());
+        $newBundle->save();
 
         foreach($request->get('audios') as $audio) {
 
