@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Audio;
 use App\Order;
+use App\Item;
 use App\User;
 use Auth;
 
@@ -32,9 +33,9 @@ class AudiosController extends Controller
 
         if ($audio->author()->get()->first()->getId() != Auth::user()->getId())
             return back()->with('error', 'You cannot delete this audio!');
-        if(!Auth::user()->isAdmin())
-            if($audio->author()->get()->first()->getId() != Auth::user()->getId())
-                return back()->with('error','You cannot delete this audio!');
+        if (!Auth::user()->isAdmin())
+            if ($audio->author()->get()->first()->getId() != Auth::user()->getId())
+                return back()->with('error', 'You cannot delete this audio!');
 
         $audio->delete();
 
@@ -167,27 +168,27 @@ class AudiosController extends Controller
         $audios = $request->session()->get("audios");
         $audios[$id] = 1;
         $request->session()->put('audios', $audios);
-        dd($audios);
+        // dd($audios);
         return back();
     }
 
     public function removeCart(Request $request)
     {
         $request->session()->forget('audios');
-        return redirect()->route('audio.index');
+        return redirect()->route('find');
     }
 
     public function cart(Request $request)
     {
         $audios = $request->session()->get("audios");
-        if($audios){
+        if ($audios) {
             $keys = array_keys($audios);
             $audiosModels = Audio::find($keys);
             $data["audios"] = $audiosModels;
-            return view('audio.cart')->with("data",$data);
+            return view('audios.cart')->with("data", $data);
         }
 
-        return redirect()->route('product.index');
+        return redirect()->route('find');
     }
 
     public function buy(Request $request)
@@ -199,16 +200,16 @@ class AudiosController extends Controller
         $totalPrice = 0;
 
         $audios = $request->session()->get("audios");
-        if($audios){
+        if ($audios) {
             $keys = array_keys($audios);
-            for($i=0;$i<count($keys);$i++){
+            for ($i = 0; $i < count($keys); $i++) {
                 $item = new Item();
                 $item->setAudioId($keys[$i]);
                 $item->setOrderId($order->getId());
                 $item->setQuantity($audios[$keys[$i]]);
                 $item->save();
                 $currentAudio = Audio::find($keys[$i]);
-                $totalPrice = $totalPrice + $currentAudio->getPrice()*$audios[$keys[$i]];
+                $totalPrice = $totalPrice + $currentAudio->getPrice() * $audios[$keys[$i]];
             }
 
             $order->setTotal($totalPrice);
@@ -217,6 +218,6 @@ class AudiosController extends Controller
             $request->session()->forget('audios');
         }
 
-        return redirect()->route('audio.index');
+        return redirect()->route('find');
     }
 }
