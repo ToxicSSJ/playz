@@ -34,7 +34,6 @@ Route::post('/bundle/save', 'BundlesController@save')->name('bundle.save');
 Route::get('/bundle/show/{id}', 'BundlesController@show')->name('bundle.show');
 
 Route::post('/save', 'AudiosController@save')->name('save');
-Route::get('/api/audios', 'AudiosController@getAutocompleteData')->name('api.audios');
 
 Route::get('/test', 'Audio\AudioController@test')->name('test');
 Route::get('/user/{id}', 'UserController@show')->name('users.show');

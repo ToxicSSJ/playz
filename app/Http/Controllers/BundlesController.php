@@ -36,6 +36,24 @@ class BundlesController extends Controller
 
     }
 
+    public function getAutocompleteData(Request $request) {
+
+        if($request->has('title')){
+
+            $data = AudioBundle::where('title', 'like','%'.$request->input('title').'%')->get();
+
+            foreach($data as $bundle) {
+                $bundle->setCoverImage(Storage::url($bundle->getCoverImage()));
+                $bundle->setAuthorName($bundle->author()->first()->getName());
+                error_log($bundle->getCoverImage());
+            }
+
+            return $data;
+
+        }
+
+    }
+
     public function bundles()
     {
 

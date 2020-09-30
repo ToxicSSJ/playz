@@ -8,13 +8,13 @@
     <div class="container text-center text-lg-left">
         <div class="row">
             <div class="col-lg-8">
-                <h1 class="display-4">{{ $audio->getTitle() }}</h1>
+                <h1 class="display-4"><span class="badge badge-info align-center">Audio</span> {{ $audio->getTitle() }}</h1>
                 <div>
                     <p class="text-muted mr-7 pr-7 d-inline-block">Author: <a href="{{ route('users.show', $audio->author()->first()->getId()) }}">{{ $audio->author()->first()->getName() }}</a></p>,
                     <p class="text-muted d-inline-block">Price: {{ $audio->getPrice() }} USD</p>
                 </div>
                 <p class="lead">{{ $audio->getDescription() }}</p>
-                <div class="row justify-content-left">
+                <div class="row justify-content-left ml-1">
                     <span class="floatybox mr-3 d-inline-block">
                         <a class="btn btn-primary btn-lg w-100" href="#" role="button">Buy</a>
                         <p class="text-muted">No credit card required</p>

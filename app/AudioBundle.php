@@ -10,6 +10,16 @@ class AudioBundle extends Model
     protected $table = 'bundles';
     protected $fillable = ['id', 'title', 'description', 'cover_image', 'price'];
 
+    private $author_name = 'Unknow';
+
+    public function getAuthorName() {
+        return $this->author_name;
+    }
+
+    public function setAuthorName($name) {
+        $this->author_name = $name;
+    }
+
     public function author() 
     {
         return $this->belongsTo(User::class, 'author_id', 'id');
@@ -29,15 +39,20 @@ class AudioBundle extends Model
     {
         return $this->attributes['description'];
     }
-
-    public function getCoverImage() 
-    {
-        return $this->attributes['cover_image'];
-    }
     
     public function getId()
     {
         return $this->attributes['id'];
+    }
+
+    public function setCoverImage($coverImage)
+    {
+        $this->attributes['cover_image'] = $coverImage;
+    }
+
+    public function getCoverImage() 
+    {
+        return $this->attributes['cover_image'];
     }
 
     public function setId($id)
