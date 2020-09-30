@@ -23,7 +23,7 @@
     <div id="results"></div>
     <br />
     <div>
-        <h2>Últimos Bundles</h2>
+        <h2>Latest Bundles</h2>
         @foreach($bundles->sortBy('id')->chunk(3) as $chunk)
         <div class="row p-5">
             @foreach($chunk as $bundle)

@@ -5,9 +5,7 @@
 <!-- Custom CSS-->
 <link rel="stylesheet" href="/css/index.css">
 
-
 <div class="flex-center position-ref full-height">
-
     <!-- Hero Section -->
     <div class="main">
         <div class="main__container">
@@ -28,13 +26,16 @@
     @isset($audios)
     <div class="services">
         <h1>See what the hype is about</h1>
+        <div class="main__content">
+            <p align="center">Our most recent songs.</p>
+        </div>
         <div class="services__container">
             @foreach($audios as $audio)
-                <div class="services__card" style="background-image: linear-gradient( to bottom, rgba(0, 0, 0, 0) 0%, rgba(17, 17, 17, 0.6) 100% ), url({{ Storage::url($audio->cover_image) }});">
-                    <h2>{{ $audio->getTitle() }}</h2>
-                    <p>{{ $audio->getDescription() }}</p>
-                    <a href="{{route('show.audio', $audio->getId())}}"><button>{{ __('audios.see_more') }}</button></a>
-                </div>
+            <div class="services__card" style="background-image: linear-gradient( to bottom, rgba(0, 0, 0, 0) 0%, rgba(17, 17, 17, 0.6) 100% ), url({{ Storage::url($audio->cover_image) }});">
+                <h2>{{ $audio->getTitle() }}</h2>
+                <p>{{ $audio->getDescription() }}</p>
+                <a href="{{route('show.audio', $audio->getId())}}"><button>{{ __('audios.see_more') }}</button></a>
+            </div>
             @endforeach
         </div>
     </div>

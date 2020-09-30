@@ -24,7 +24,7 @@
     <div id="results"></div>
     <br />
     <div>
-        <h2>Últimos Audios</h2>
+        <h2>Latest Audios</h2>
         @foreach($audios->sortBy('id')->chunk(3) as $chunk)
         <div class="row p-5">
             @foreach($chunk as $audio)
