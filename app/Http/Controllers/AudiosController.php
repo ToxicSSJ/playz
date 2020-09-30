@@ -14,7 +14,7 @@ class AudiosController extends Controller
 
     public function finder()
     {
-        return view('audios.finder');
+        return view('audios.finder')->with('audios', Audio::all());
     }
 
     public function upload()
@@ -29,10 +29,10 @@ class AudiosController extends Controller
             $data = Audio::where('title', 'like','%'.$request->input('title').'%')->get();
 
             foreach($data as $audio) {
-                $audio->cover_image = Storage::url($audio->getCoverImage());
-                $audio->audio_file = Storage::url($audio->getAudioFile());
-                $audio->author_name = User::findOrFail($audio->getAuthorId())->name;
-                error_log($audio->cover_image);
+                $audio->setCoverImage(Storage::url($audio->getCoverImage()));
+                $audio->setAudioFile(Storage::url($audio->getAudioFile()));
+                $audio->setAuthorName($audio->author()->first()->getName());
+                error_log($audio->getCoverImage());
             }
 
             return $data;
@@ -64,7 +64,7 @@ class AudiosController extends Controller
         $coverPath = $this->saveFile($request, 'image', 'public/covers');
         $audioPath = $this->saveFile($request, 'audio', 'public/audios');
 
-        $newAudio = Audio::create([
+        $newAudio = new Audio([
 
             'title' => $request->get('title'),
             'description' => $request->get('description'),
@@ -72,12 +72,17 @@ class AudiosController extends Controller
             'contributors' => $request->get('contributors'),
             'categories' => $request->get('categories'),
             'price' => $request->get('price'),
-
-            'author_id' => Auth::user()->getId(),
+            
             'audio_file' => $audioPath,
             'cover_image' => $coverPath
 
         ]);
+
+        // error_log(Auth::user()->getId());
+
+        // Auth::user()->audios()->save($newAudio);
+        $newAudio->author()->associate(Auth::user()->getId());
+        $newAudio->save();
         
         return back()->with('success','Audio created successfully!');
 

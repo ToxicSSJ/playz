@@ -8,11 +8,16 @@ class AudioBundle extends Model
 {
 
     protected $table = 'bundles';
-    protected $fillable = ['id', 'author_id', 'title', 'description', 'cover_image', 'price'];
+    protected $fillable = ['id', 'title', 'description', 'cover_image', 'price'];
 
-    public function getAuthorId()
+    public function author() 
     {
-        return $this->attributes['author_id'];
+        return $this->belongsTo(User::class, 'author_id', 'id');
+    }
+
+    public function audios()
+    {
+        return $this->hasOneOrMany(Audio::class, 'audios_id', 'id');
     }
 
     public function getTitle() 
