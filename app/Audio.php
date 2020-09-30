@@ -45,9 +45,19 @@ class Audio extends Model
         return $this->attributes['type'];
     }
 
+    public function setAudioFile($audioFile)
+    {
+        $this->attributes['audio_file'] = $audioFile;
+    }
+
     public function getAudioFile() 
     {
         return $this->attributes['audio_file'];
+    }
+
+    public function setCoverImage($coverImage)
+    {
+        $this->attributes['cover_image'] = $coverImage;
     }
 
     public function getCoverImage() 
@@ -83,6 +93,11 @@ class Audio extends Model
     public function setPrice($price)
     {
         $this->attributes['price'] = $price;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->created_at;
     }
 
 }

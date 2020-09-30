@@ -17,6 +17,25 @@ class AudiosController extends Controller
         return view('audios.finder')->with('audios', Audio::all());
     }
 
+    public function show($id)
+    {
+
+        $data = [];
+        $audio = Audio::findOrFail($id);
+
+        if($audio == null) {
+            return redirect()->route('home.audios');
+        }
+
+        $audios = Auth::user()->audios()->get();
+        $newaudios = $audios->filter(function ($audio2) use ($audio) {
+            return $audio2->getId() != $audio->getId();
+        })->values();
+
+        return view('audios.show', ['title' => trans('messages.audios_show_title')])->with("audio", $audio)->with("audios", $newaudios);
+
+    }
+
     public function upload()
     {
         return view('audios.upload');

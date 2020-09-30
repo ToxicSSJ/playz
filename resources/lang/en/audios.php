@@ -18,6 +18,7 @@ return [
     'price' => 'Price',
     'contributors' => 'Contributors',
     'bundles' => 'Bundles',
+    'see_more' => 'See More',
 
     'phases' => [
         'phase' => 'Phase'
