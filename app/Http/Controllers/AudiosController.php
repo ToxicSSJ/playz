@@ -32,6 +32,9 @@ class AudiosController extends Controller
 
         if ($audio->author()->get()->first()->getId() != Auth::user()->getId())
             return back()->with('error', 'You cannot delete this audio!');
+        if(!Auth::user()->isAdmin())
+            if($audio->author()->get()->first()->getId() != Auth::user()->getId())
+                return back()->with('error','You cannot delete this audio!');
 
         $audio->delete();
 

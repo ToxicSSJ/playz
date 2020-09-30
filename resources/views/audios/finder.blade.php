@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('head')
+<title>{{ __('audios.finder_title') }} - PlayZ</title>
+@endsection
+
 @section('content')
 <link href="{{ asset('css/finder.css') }}" rel="stylesheet">
 
@@ -15,7 +19,7 @@
                 @endif
 
                 <div class="form-group">
-                    <input id="audio_title" name="audio_title" type="text" class="form-control" placeholder="Enter audio or song title">
+                    <input id="audio_title" name="audio_title" type="text" class="form-control" placeholder="{{ __('audios.enter_audio_title') }}">
                 </div>
 
             </div>
@@ -24,7 +28,7 @@
     <div id="results"></div>
     <br />
     <div>
-        <h2>Latest Audios</h2>
+        <h2>{{ __('audios.latest_audios') }}</h2>
         @foreach($audios->sortBy('id')->chunk(3) as $chunk)
         <div class="row p-5">
             @foreach($chunk as $audio)
@@ -35,20 +39,20 @@
                         <h4>{{ $audio->getTitle() }}</h4>
                         </small></p>
 
-                        <p class="card-text m-0"><small class="text-muted">Author: {{ $audio->author()->first()->getName() }}</small></p>
-                        <p class="card-text m-0"><small class="text-muted">Precio: {{ $audio->getPrice() }} USD</small></p>
-                        <p class="card-text m-0"><small class="text-muted">Tipo: {{ $audio->getType() }}</small></p>
+                        <p class="card-text m-0"><small class="text-muted">{{ __('audios.author') }}: {{ $audio->author()->first()->getName() }}</small></p>
+                        <p class="card-text m-0"><small class="text-muted">{{ __('audios.price') }}: {{ $audio->getPrice() }} USD</small></p>
+                        <p class="card-text m-0"><small class="text-muted">{{ __('audios.type') }}: {{ $audio->getType() }}</small></p>
                         <div class="card-body">
                             <a href="javascript:void(0)" onclick="return play('{{ Storage::url($audio->cover_image) }}', '{{ Storage::url($audio->audio_file) }}', '{{ $audio->author()->first()->getName() }}', '{{ $audio->getTitle() }}');" class="btn btn-secondary">Play</a>
 
                             <form action="{{ route('audio.addToCart', $audio->getId()) }}" method="POST">
                                 @csrf
                                 <div class="form-row">
-                                    <button type="submit" class="btn btn-primary">Add to cart</button>
+                                    <button type="submit" class="btn btn-primary">{{ __('audios.add_to_cart') }}</button>
                                 </div>
                             </form>
 
-                            <a href="{{route('show.audio', $audio->getId())}}" class="btn btn-warning mt-1">See More</a>
+                            <a href="{{route('show.audio', $audio->getId())}}" class="btn btn-warning mt-1">{{ __('audios.see_more') }}</a>
                         </div>
                     </div>
                 </div>
@@ -108,7 +112,7 @@
                     bg = "{{ asset('img/finder/midi-bg.jpg') }}";
                 }
 
-                $('#results').append("<h4>Resultado</h4><div class=\"card\"><div class=\"card-header heading-footer container_foto\" style=\"background-image: url(" + bg + ");\"></div><div class=\"card-block text-center p-3 mt-12\"><img class=\"panel-profile-img rounded-square\" src=\"" + img + "\"><div class=\"text-left\"><p class=\"author-title text-left\"><i class=\"fas fa-file-audio\"></i><strong> " + title + "</strong></p><p>" + description + "</p><a href=\"javascript:void(0)\" href=\"/audio/show/" + id + "\" id=\"play\" class=\"btn btn-primary\">{{ __('audios.play') }}</a><a href=\"/audio/show/" + id + "\" id=\"see_more\" class=\"btn btn-warning ml-1\">{{ __('audios.see_more') }}</a></div></div></div>");
+                $('#results').append("<h4>{{ __('audios.results') }}</h4><div class=\"card\"><div class=\"card-header heading-footer container_foto\" style=\"background-image: url(" + bg + ");\"></div><div class=\"card-block text-center p-3 mt-12\"><img class=\"panel-profile-img rounded-square\" src=\"" + img + "\"><div class=\"text-left\"><p class=\"author-title text-left\"><i class=\"fas fa-file-audio\"></i><strong> " + title + "</strong></p><p>" + description + "</p><a href=\"javascript:void(0)\" href=\"/audio/show/" + id + "\" id=\"play\" class=\"btn btn-primary\">{{ __('audios.play') }}</a><a href=\"/audio/show/" + id + "\" id=\"see_more\" class=\"btn btn-warning ml-1\">{{ __('audios.see_more') }}</a></div></div></div>");
 
                 $('#play').click(function() {
 

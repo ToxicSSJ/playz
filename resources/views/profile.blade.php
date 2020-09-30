@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('head')
+<title>{{ __('audios.profile') }} - PlayZ</title>
+@endsection
+
 @section('content')
 
 <link rel="stylesheet" href="/css/profile.css">
@@ -14,10 +18,12 @@
             <div class="col-md-6">
                 <div class="profile-head">
                     <h5>
-                        {{ Auth::user()->name }}
+                        @if(Auth::user()->isAdmin())
+                            <span class="badge badge-danger align-center">{{ __('audios.staff') }}</span>
+                        @endif
+                        {{ Auth::user()->getName() }}
                     </h5>
                     <h6>
-                        {{ Auth::user()->audios()->first() }}
                         Dj with Love
                     </h6>
                     <p class="proile-rating">WALLET: <span>${{ Auth::user()->wallet }}</span></p>

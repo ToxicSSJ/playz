@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('head')
+<title>{{ $user->getName() }} - PlayZ</title>
+@endsection
+
 @section('content')
 
 <link rel="stylesheet" href="/css/profile.css">
@@ -14,7 +18,10 @@
             <div class="col-md-6">
                 <div class="profile-head">
                     <h5>
-                        {{ $user->name }}
+                        @if($user->isAdmin())
+                            <span class="badge badge-danger align-center">{{ __('audios.staff') }}</span>
+                        @endif
+                        {{ $user->getName() }}
                     </h5>
                     <h6>
                         Dj with Love
@@ -31,9 +38,13 @@
             <div class="col-md-4">
                 <div class="profile-work">
                     <p>USER ID</p>
-                    <a href="">{{ $user->id }}</a>
+                    <a href="">{{ $user->getId() }}</a>
                     <p>EMAIL</p>
-                    <a href="">{{ $user->email }}</a>
+                    <a href="">{{ $user->getEmail() }}</a>
+                    @if(Auth::user()->isAdmin() && !$user->isAdmin())
+                        <p>{{ __('audios.admin_panel') }}</p>
+                        <a href="{{ route("users.delete", $user->getId()) }}"><i class="fas fa-trash" title="{{ __('audios.delete') }}"></i> Delete User</a>
+                    @endif
                 </div>
             </div>
             <div class="col-md-8">
@@ -42,10 +53,10 @@
                         <div class="row">
                             @foreach($audios as $audio)
                             <div class="card">
-                                <img class="card-img-top" src="{{ Storage::url($audio->cover_image) }}" height="300" width="50" alt="Card image cap">
+                                <img class="card-img-top" src="{{ Storage::url($audio->getCoverImage()) }}" height="300" width="50" alt="Card image cap">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ $audio->title }}</h5>
-                                    <p class="card-text">{{ $audio->description }}.</p>
+                                    <h5 class="card-title">{{ $audio->getTitle() }}</h5>
+                                    <p class="card-text">{{ $audio->getDescription() }}.</p>
                                     <a href="#" class="btn btn-primary">Go somewhere</a>
                                 </div>
                             </div>

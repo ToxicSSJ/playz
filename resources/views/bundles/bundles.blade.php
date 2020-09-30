@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('head')
+<title>{{ __('audios.bundles_title') }} - PlayZ</title>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -14,7 +18,7 @@
 
                 <div class="form-group row">
                     <input id="audio_title" name="audio_title" type="text" class="form-control col-md-9" placeholder="Enter bundle title">
-                    <a class="btn btn-success ml-3 col-md-2 " href="{{ route('bundle.add') }}"><i class="fas fa-plus"></i> Add Bundle</a>
+                    <a class="btn btn-success ml-3 col-md-2 " href="{{ route('bundle.add') }}"><i class="fas fa-plus"></i> {{ __('audios.add_bundle') }}</a>
                 </div>
 
             </div>
@@ -23,7 +27,7 @@
     <div id="results"></div>
     <br />
     <div>
-        <h2>Latest Bundles</h2>
+        <h2>{{ __('audios.latest_bundles') }}</h2>
         @foreach($bundles->sortBy('id')->chunk(3) as $chunk)
         <div class="row p-5">
             @foreach($chunk as $bundle)
@@ -33,11 +37,11 @@
                         <div class="card-body">
                             <h4>{{ $bundle->getTitle() }}</h4>
                             </small></p>
-                            <p class="card-text m-0"><small class="text-muted">Author: {{ $bundle->author()->first()->getName() }}</small></p>
-                            <p class="card-text m-0"><small class="text-muted">Precio: {{ $bundle->getPrice() }} USD</small></p>
+                            <p class="card-text m-0"><small class="text-muted">{{ __('audios.author') }}: {{ $bundle->author()->first()->getName() }}</small></p>
+                            <p class="card-text m-0"><small class="text-muted">{{ __('audios.price') }}: {{ $bundle->getPrice() }} USD</small></p>
                             <div class="card-body">
-                                <a href="{{route('bundle.show', $bundle->getId())}}" class="btn btn-success">See More</a>
-                                <a href="#" class="btn btn-primary">Add to cart</a>
+                                <a href="{{route('bundle.show', $bundle->getId())}}" class="btn btn-success">{{ __('audios.see_more') }}</a>
+                                <a href="#" class="btn mt-1 btn-primary">{{ __('audios.add_to_cart') }}</a>
                             </div>
                         </div>
                     </div>
@@ -64,7 +68,7 @@
                 var title = ui.item.title;
                 var description = ui.item.description;
 
-                $('#results').append("<h4>Resultado</h4><div class=\"card\"><div class=\"card-header heading-footer container_foto\" style=\"background-image: url(" + bg + ");\"></div><div class=\"card-block text-center p-3 mt-12\"><img class=\"panel-profile-img rounded-square\" src=\"" + img + "\"><div class=\"text-left\"><p class=\"author-title text-left\"><i class=\"fas fa-file-audio\"></i><strong> " + title + "</strong></p><p>" + description + "</p><a href=\"/bundle/show/" + id + "\" id=\"play\" class=\"btn btn-primary\">{{ __('audios.see_more') }}</a></div></div></div>");
+                $('#results').append("<h4>{{ __('audios.results') }}</h4><div class=\"card\"><div class=\"card-header heading-footer container_foto\" style=\"background-image: url(" + bg + ");\"></div><div class=\"card-block text-center p-3 mt-12\"><img class=\"panel-profile-img rounded-square\" src=\"" + img + "\"><div class=\"text-left\"><p class=\"author-title text-left\"><i class=\"fas fa-file-audio\"></i><strong> " + title + "</strong></p><p>" + description + "</p><a href=\"/bundle/show/" + id + "\" id=\"play\" class=\"btn btn-primary\">{{ __('audios.see_more') }}</a></div></div></div>");
 
             },
             source: function(request, response) {

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('head')
+<title>{{ $bundle->getTitle() }} - PlayZ</title>
+@endsection
+
 @section('content')
 <link href="{{ asset('css/show.css') }}" rel="stylesheet">
 
@@ -8,23 +12,35 @@
     <div class="container text-center text-lg-left">
         <div class="row">
             <div class="col-lg-8">
-                <h1 class="display-4"><span class="badge badge-warning align-center">Bundle</span> {{ $bundle->getTitle() }}</h1>
+                <h1 class="display-4"><span class="badge badge-warning align-center">{{ __('audios.bundle') }}</span> {{ $bundle->getTitle() }}</h1>
                 <div>
-                    <p class="text-muted mr-7 pr-7 d-inline-block">Author: <a href="{{ route('users.show', $bundle->author()->first()->getId()) }}">{{ $bundle->author()->first()->getName() }}</a></p>,
-                    <p class="text-muted d-inline-block">Price: {{ $bundle->getPrice() }} USD</p>
+                    <p class="text-muted mr-7 pr-7 d-inline-block">{{ __('audios.author') }}: <a href="{{ route('users.show', $bundle->author()->first()->getId()) }}">{{ $bundle->author()->first()->getName() }}</a></p>,
+                    <p class="text-muted d-inline-block">{{ __('audios.price') }}: {{ $bundle->getPrice() }} USD</p>
                 </div>
                 <p class="lead">{{ $bundle->getDescription() }}</p>
                 <div class="row justify-content-left ml-1">
                     <span class="floatybox mr-3 d-inline-block">
-                        <a class="btn btn-primary btn-lg w-100" href="#" role="button">Buy</a>
-                        <p class="text-muted">No credit card required</p>
+                        <a class="btn btn-primary btn-lg w-100" href="#" role="button">{{ __('audios.buy') }}</a>
+                        <p class="text-muted">{{ __('audios.no_credit_card_required') }}</p>
                     </span>
                 </div>
             </div>
             <div class="col-lg-4 align-items-bottom d-flex">
                 <div class="col-12">
                     <img src="{{ Storage::url($bundle->getCoverImage()) }}" alt="" class="img-fluid">
-                    <p class="card-text m-0"><small class="text-muted">Released: {{ strtoupper(\Carbon\Carbon::parse($bundle->created_at)->format('d M, Y')) }}</small></p>
+                    <p class="card-text m-0"><small class="text-muted">{{ __('audios.released') }}: {{ strtoupper(\Carbon\Carbon::parse($bundle->created_at)->format('d M, Y')) }}</small></p>
+                    @if(Auth::user()->getId() == $bundle->author()->get()->first()->getId())
+                    <p class="card-text m-0"><small class="text-muted">{{ __('audios.author_panel') }}: 
+                        <a href="{{ route("bundle.delete", $bundle->getId()) }}"><i class="fas fa-trash" title="{{ __('bundles.delete') }}"></i></a>
+                        <a href="#" onclick="return copyURL('{{ route("bundle.show", $bundle->getId()) }}');"><i class="fas fa-clipboard" title="{{ __('audios.copy_link') }}"></i></a>
+                    </small></p>
+                    @endif
+                    @if(Auth::user()->isAdmin())
+                    <p class="card-text m-0"><small class="text-muted">{{ __('audios.admin_panel') }}: 
+                        <a href="{{ route("bundle.delete", $bundle->getId()) }}"><i class="fas fa-trash" title="{{ __('audios.delete') }}"></i></a>
+                        <a href="#" onclick="return copyURL('{{ route("bundle.show", $bundle->getId()) }}');"><i class="fas fa-clipboard" title="{{ __('audios.copy_link') }}"></i></a>
+                    </small></p>
+                    @endif
                 </div>
             </div>
         </div>
@@ -50,13 +66,13 @@
                             <h4>{{ $audio->getTitle() }}</h4>
                             </small></p>
                             <!-- <p>{{ $audio->getDescription() }}</p> -->
-                            <p class="card-text m-0"><small class="text-muted">Author: {{ $audio->author()->first()->getName() }}</small></p>
-                            <p class="card-text m-0"><small class="text-muted">Precio: {{ $audio->getPrice() }} USD</small></p>
-                            <p class="card-text m-0"><small class="text-muted">Tipo: {{ $audio->getType() }}</small></p>
+                            <p class="card-text m-0"><small class="text-muted">{{ __('audios.author') }}: {{ $audio->author()->first()->getName() }}</small></p>
+                            <p class="card-text m-0"><small class="text-muted">{{ __('audios.price') }}: {{ $audio->getPrice() }} USD</small></p>
+                            <p class="card-text m-0"><small class="text-muted">{{ __('audios.type') }}: {{ $audio->getType() }}</small></p>
                             <div class="card-body">
-                                <a href="javascript:void(0)" onclick="return play('{{ Storage::url($audio->cover_image) }}', '{{ Storage::url($audio->audio_file) }}', '{{ $audio->author()->first()->getName() }}', '{{ $audio->getTitle() }}');" class="btn btn-secondary">Play</a>
-                                <a href="#" class="btn btn-primary">Add to cart</a>
-                                <a href="{{route('show.audio', $audio->getId())}}" class="btn mt-1 btn-warning">See More</a>
+                                <a href="javascript:void(0)" onclick="return play('{{ Storage::url($audio->cover_image) }}', '{{ Storage::url($audio->audio_file) }}', '{{ $audio->author()->first()->getName() }}', '{{ $audio->getTitle() }}');" class="btn btn-secondary">{{ __('audios.see_more') }}</a>
+                                <a href="#" class="btn mt-1 btn-primary">{{ __('audios.add_to_cart') }}</a>
+                                <a href="{{route('show.audio', $audio->getId())}}" class="btn mt-1 btn-warning">{{ __('audios.see_more') }}</a>
                             </div>
                         </div>
                     </div>
