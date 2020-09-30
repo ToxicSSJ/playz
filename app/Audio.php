@@ -8,11 +8,26 @@ class Audio extends Model
 {
 
     protected $table = 'audios';
-    protected $fillable = ['id', 'author_id', 'title', 'description', 'type', 'audio_file', 'cover_image', 'contributors', 'categories', 'price'];
+    protected $fillable = ['id', 'title', 'description', 'type', 'audio_file', 'cover_image', 'contributors', 'categories', 'price'];
 
-    public function getAuthorId()
+    private $author_name = 'Unknow';
+
+    public function getAuthorName() {
+        return $this->author_name;
+    }
+
+    public function setAuthorName($name) {
+        $this->author_name = $name;
+    }
+
+    public function author() 
     {
-        return $this->attributes['author_id'];
+        return $this->belongsTo(User::class, 'author_id', 'id');
+    }
+
+    public function bundles()
+    {
+        return $this->belongsToMany(AudioBundle::class, 'audios_id', 'id');
     }
 
     public function getTitle() 

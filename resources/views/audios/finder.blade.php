@@ -22,11 +22,64 @@
         </div>
     </div>
     <div id="results"></div>
+    <br />
+    <div>
+        <h2>Últimos Audios</h2>
+        @foreach($audios->sortBy('id')->chunk(3) as $chunk)
+        <div class="row p-5">
+            @foreach($chunk as $audio)
+                <div class="col d-flex align-items-stretch">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="{{ Storage::url($audio->cover_image) }}" alt="Card image cap">
+                        <div class="card-body">
+                            <h4>{{ $audio->getTitle() }}</h4>
+                            </small></p>
+                            <p>{{ $audio->getDescription() }}</p>
+                            <p class="card-text m-0"><small class="text-muted">Author: {{ $audio->author()->first()->getName() }}</small></p>
+                            <p class="card-text m-0"><small class="text-muted">Precio: {{ $audio->getPrice() }} USD</small></p>
+                            <p class="card-text m-0"><small class="text-muted">Tipo: {{ $audio->getType() }}</small></p>
+                            <div class="card-body">
+                                <a href="javascript:void(0)" onclick="return play('{{ Storage::url($audio->cover_image) }}', '{{ Storage::url($audio->audio_file) }}', '{{ $audio->author()->first()->getName() }}', '{{ $audio->getTitle() }}');" class="btn btn-secondary">Play</a>
+                                <a href="#" class="btn btn-primary">Agregar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        @endforeach
+    </div>
 </div>
 @endsection
 @section('scripts')
 <script>
+
     var inline, run;
+
+    function play(img, audio, author, title) {
+
+        if (run == undefined) {
+
+            run = $('body').stickyAudioPlayer({
+                url: audio,
+                position: 'bottom', //'bottom'|'top'|'inline'
+                text: author + " - " + title,
+                image: img,
+                volume: 40,
+                repeat: false,
+            });
+
+            run.play();
+            return;
+
+        }
+
+        run.changeAudio(audio, author + " - " + title, img);
+        run.play();
+        run.show();
+
+    }
+
     $(function() {
         $("#audio_title").autocomplete({
             minLength: 1,
@@ -47,11 +100,12 @@
                     bg = "{{ asset('img/finder/midi-bg.jpg') }}";
                 }
 
-                $('#results').append("<p>Resultado:</p><div class=\"card\"><div class=\"card-header heading-footer container_foto\" style=\"background-image: url(" + bg + ");\"></div><div class=\"card-block text-center p-3 mt-12\"><img class=\"panel-profile-img rounded-square\" src=\"" + img + "\"><div class=\"text-left\"><p class=\"author-title text-left\"><i class=\"fas fa-file-audio\"></i><strong> " + title + "</strong></p><p>" + description + "</p><a href=\"#\" id=\"play\" class=\"btn btn-primary\">{{ __('audios.play') }}</a></div></div></div>");
+                $('#results').append("<h4>Resultado</h4><div class=\"card\"><div class=\"card-header heading-footer container_foto\" style=\"background-image: url(" + bg + ");\"></div><div class=\"card-block text-center p-3 mt-12\"><img class=\"panel-profile-img rounded-square\" src=\"" + img + "\"><div class=\"text-left\"><p class=\"author-title text-left\"><i class=\"fas fa-file-audio\"></i><strong> " + title + "</strong></p><p>" + description + "</p><a href=\"javascript:void(0)\" id=\"play\" class=\"btn btn-primary\">{{ __('audios.play') }}</a></div></div></div>");
 
                 $('#play').click(function() {
 
-                    if (run == undefined) {
+                    play(img, audio, author, title);
+                    /*if (run == undefined) {
 
                         run = $('body').stickyAudioPlayer({
                             url: audio,
@@ -69,7 +123,7 @@
 
                     run.changeAudio(audio, author + " - " + title, img);
                     run.play();
-                    run.show();
+                    run.show();*/
 
                 });
 
@@ -97,12 +151,12 @@
                             }
                         })
 
-                        if (run !== undefined) {
-
-                            run.pause();
-                            run.hide();
-
-                        }
+                        // if (run !== undefined) {
+                        // 
+                        //    run.pause();
+                        //    run.hide();
+                        //
+                        // }
 
                         $('#results').empty();
                         response($.ui.autocomplete.filter(array, request.term));
@@ -110,6 +164,7 @@
                     });
             }
         });
-    })
+    });
+
 </script>
 @endsection
