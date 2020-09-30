@@ -20,6 +20,10 @@ Route::get('/profile', 'ProfileController@profile')->name('profile');
 
 Route::get('/upload', 'AudiosController@upload')->name('upload');
 Route::get('/audio/show/{id}', 'AudiosController@show')->name('show.audio');
+Route::post('/audio/add-to-cart/{id}', 'AudiosController@addToCart')->name("audio.addToCart");
+Route::get('/cart/remove', 'AudiosController@removeCart')->name("audios.removeCart");
+Route::get('/cart/cart', 'AudiosController@cart')->name("audios.cart");
+Route::post('/cart/buy', 'AudiosController@buy')->name("audios.buy");
 Route::get('/find', 'AudiosController@finder')->name('find');
 Route::get('/hire', 'HireController@hire')->name('hire');
 
