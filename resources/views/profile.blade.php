@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('head')
+<title>{{ __('audios.profile') }} - PlayZ</title>
+@endsection
+
 @section('content')
 
 <link rel="stylesheet" href="/css/profile.css">

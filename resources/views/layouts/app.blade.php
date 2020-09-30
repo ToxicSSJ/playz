@@ -7,8 +7,10 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+    @yield('head')
 
-    <title>{{ config('app.name', 'PLAYZ') }}</title>
+    <!-- <title>{{ config('app.name', 'PLAYZ') }}</title> -->
 
     <!-- Scripts -->
     <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
@@ -68,7 +70,7 @@
                     @endif
                     @else
                     <li class="navbar__item">
-                        <a href="{{ route('home') }}" class="navbar__links">{{ __('audios.home') }}</a>
+                        <a href="{{ route('/') }}" class="navbar__links">{{ __('audios.home') }}</a>
                     </li>
                     <li class="navbar__item">
                         <a href="{{ route('find') }}" class="navbar__links">{{ __('audios.find') }}</a>

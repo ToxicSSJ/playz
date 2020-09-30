@@ -13,12 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
-
+Route::get('/', 'HomeController@index')->name('/');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/profile', 'ProfileController@profile')->name('profile');
@@ -38,3 +33,5 @@ Route::get('/delete/{id}', 'AudiosController@delete')->name('delete');
 
 Route::get('/test', 'Audio\AudioController@test')->name('test');
 Route::get('/user/{id}', 'UserController@show')->name('users.show');
+
+Auth::routes();
