@@ -16,8 +16,8 @@ class CreateCreditCardsTable extends Migration
         Schema::create('credit_cards', function (Blueprint $table) {
             $table->id();
             $table->string('number')->unique();
-            $table->int('expirationMonth');
-            $table->int('expirationYear');
+            $table->integer('expirationMonth');
+            $table->integer('expirationYear');
             $table->string('name');
             $table->string('cvc');
             $table->timestamps();

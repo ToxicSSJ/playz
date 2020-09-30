@@ -92,6 +92,10 @@
     width: 100%;
 }
 
+.navbar__btn > a:hover {
+    color: #fff;
+}
+
 .button {
     display: flex;
     justify-content: center;

@@ -61,7 +61,7 @@ nav .navbar-nav li a:hover {
 
 .navbar-down
 {
-  /* border-bottom: solid 2px #D8DBE0; */
+  border-bottom: solid 2px #D8DBE0;
 }
 
 .carrousel
@@ -88,7 +88,6 @@ body
 
 #cart_menu_num {
   position: absolute;
-  
   left: 60%;
   bottom: 50%;
   background: linear-gradient(180deg, #C34B90 0%, #C34A90 41.15%, #C04A90 56.03%, #BB4990 66.64%, #B34890 75.22%, #A84690 82.56%, #98458F 89.08%, #86438E 94.83%, #72408D 99.9%);
