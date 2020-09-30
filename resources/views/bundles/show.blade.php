@@ -29,6 +29,18 @@
                 <div class="col-12">
                     <img src="{{ Storage::url($bundle->getCoverImage()) }}" alt="" class="img-fluid">
                     <p class="card-text m-0"><small class="text-muted">{{ __('audios.released') }}: {{ strtoupper(\Carbon\Carbon::parse($bundle->created_at)->format('d M, Y')) }}</small></p>
+                    @if(Auth::user()->getId() == $bundle->author()->get()->first()->getId())
+                    <p class="card-text m-0"><small class="text-muted">{{ __('audios.author_panel') }}: 
+                        <a href="{{ route("bundle.delete", $bundle->getId()) }}"><i class="fas fa-trash" title="{{ __('bundles.delete') }}"></i></a>
+                        <a href="#" onclick="return copyURL('{{ route("bundle.show", $bundle->getId()) }}');"><i class="fas fa-clipboard" title="{{ __('audios.copy_link') }}"></i></a>
+                    </small></p>
+                    @endif
+                    @if(Auth::user()->isAdmin())
+                    <p class="card-text m-0"><small class="text-muted">{{ __('audios.admin_panel') }}: 
+                        <a href="{{ route("bundle.delete", $bundle->getId()) }}"><i class="fas fa-trash" title="{{ __('audios.delete') }}"></i></a>
+                        <a href="#" onclick="return copyURL('{{ route("bundle.show", $bundle->getId()) }}');"><i class="fas fa-clipboard" title="{{ __('audios.copy_link') }}"></i></a>
+                    </small></p>
+                    @endif
                 </div>
             </div>
         </div>

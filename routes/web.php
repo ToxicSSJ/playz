@@ -27,11 +27,13 @@ Route::get('/bundles', 'BundlesController@bundles')->name('bundles');
 Route::get('/bundle/add', 'BundlesController@bundleAdd')->name('bundle.add');
 Route::post('/bundle/save', 'BundlesController@save')->name('bundle.save');
 Route::get('/bundle/show/{id}', 'BundlesController@show')->name('bundle.show');
+Route::get('/bundle/delete/{id}', 'BundlesController@delete')->name('bundle.delete');
 
 Route::post('/save', 'AudiosController@save')->name('save');
 Route::get('/delete/{id}', 'AudiosController@delete')->name('delete');
 
 Route::get('/test', 'Audio\AudioController@test')->name('test');
 Route::get('/user/{id}', 'UserController@show')->name('users.show');
+Route::get('/user/delete/{id}', 'UserController@delete')->name('users.delete');
 
 Auth::routes();

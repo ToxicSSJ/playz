@@ -36,6 +36,28 @@ class BundlesController extends Controller
 
     }
 
+    public function delete($id)
+    {
+
+        if(!Auth::check())
+            return back()->with('error','Login before delete!');
+
+        $data = [];
+        $bundle = AudioBundle::findOrFail($id);
+
+        if($bundle == null)
+            return redirect()->route('bundles');
+
+        if(!Auth::user()->isAdmin())
+            if($bundle->author()->get()->first()->getId() != Auth::user()->getId())
+                return back()->with('error','You cannot delete this audio!');
+
+        $bundle->delete();
+
+        return view('bundles.bundles')->with('error','Bundle deleted!')->with('bundles', AudioBundle::all());
+
+    }
+
     public function getAutocompleteData(Request $request) {
 
         if($request->has('title')){

@@ -82,6 +82,7 @@ return [
     'welcome_description' => 'See what make us different.',
     'get_started' => 'Get Started',
     'latest_songs_home' => 'See what the hype is about',
+    'staff' => 'Staff',
 
     'phases' => [
         'phase' => 'Phase'

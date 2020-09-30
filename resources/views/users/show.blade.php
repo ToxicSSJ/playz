@@ -18,6 +18,9 @@
             <div class="col-md-6">
                 <div class="profile-head">
                     <h5>
+                        @if($user->isAdmin())
+                            <span class="badge badge-danger align-center">{{ __('audios.staff') }}</span>
+                        @endif
                         {{ $user->getName() }}
                     </h5>
                     <h6>
@@ -38,6 +41,10 @@
                     <a href="">{{ $user->getId() }}</a>
                     <p>EMAIL</p>
                     <a href="">{{ $user->getEmail() }}</a>
+                    @if(Auth::user()->isAdmin() && !$user->isAdmin())
+                        <p>{{ __('audios.admin_panel') }}</p>
+                        <a href="{{ route("users.delete", $user->getId()) }}"><i class="fas fa-trash" title="{{ __('audios.delete') }}"></i> Delete User</a>
+                    @endif
                 </div>
             </div>
             <div class="col-md-8">
