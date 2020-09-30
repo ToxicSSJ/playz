@@ -70,7 +70,7 @@
                             <p class="card-text m-0"><small class="text-muted">{{ __('audios.price') }}: {{ $audio->getPrice() }} USD</small></p>
                             <p class="card-text m-0"><small class="text-muted">{{ __('audios.type') }}: {{ $audio->getType() }}</small></p>
                             <div class="card-body">
-                                <a href="javascript:void(0)" onclick="return play('{{ Storage::url($audio->cover_image) }}', '{{ Storage::url($audio->audio_file) }}', '{{ $audio->author()->first()->getName() }}', '{{ $audio->getTitle() }}');" class="btn btn-secondary">{{ __('audios.play') }}</a>
+                                <a href="javascript:void(0)" onclick="return play('{{ Storage::url($audio->cover_image) }}', '{{ Storage::url($audio->getAudioFile()) }}', '{{ $audio->author()->first()->getName() }}', '{{ $audio->getTitle() }}');" class="btn btn-secondary">{{ __('audios.play') }}</a>
                                 <a href="#" class="btn mt-1 btn-primary">{{ __('audios.add_to_cart') }}</a>
                                 <a href="{{route('show.audio', $audio->getId())}}" class="btn mt-1 btn-warning">{{ __('audios.see_more') }}</a>
                             </div>
