@@ -32,24 +32,31 @@
         @foreach($audios->sortBy('id')->chunk(3) as $chunk)
         <div class="row p-5">
             @foreach($chunk as $audio)
-                <div class="col d-flex d-table align-items-stretch align-middle">
-                    <div class="card d-table-cell " style="width: 18rem;">
-                        <img class="card-img-top" src="{{ Storage::url($audio->getCoverImage()) }}" alt="Card image cap">
+            <div class="col d-flex d-table align-items-stretch align-middle">
+                <div class="card d-table-cell " style="width: 18rem;">
+                    <img class="card-img-top" src="{{ Storage::url($audio->getCoverImage()) }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h4>{{ $audio->getTitle() }}</h4>
+                        </small></p>
+
+                        <p class="card-text m-0"><small class="text-muted">{{ __('audios.author') }}: {{ $audio->author()->first()->getName() }}</small></p>
+                        <p class="card-text m-0"><small class="text-muted">{{ __('audios.price') }}: {{ $audio->getPrice() }} USD</small></p>
+                        <p class="card-text m-0"><small class="text-muted">{{ __('audios.type') }}: {{ $audio->getType() }}</small></p>
                         <div class="card-body">
-                            <h4>{{ $audio->getTitle() }}</h4>
-                            </small></p>
-                            <!-- <p>{{ $audio->getDescription() }}</p> -->
-                            <p class="card-text m-0"><small class="text-muted">{{ __('audios.author') }}: {{ $audio->author()->first()->getName() }}</small></p>
-                            <p class="card-text m-0"><small class="text-muted">{{ __('audios.price') }}: {{ $audio->getPrice() }} USD</small></p>
-                            <p class="card-text m-0"><small class="text-muted">{{ __('audios.type') }}: {{ $audio->getType() }}</small></p>
-                            <div class="card-body">
-                                <a href="javascript:void(0)" onclick="return play('{{ Storage::url($audio->cover_image) }}', '{{ Storage::url($audio->audio_file) }}', '{{ $audio->author()->first()->getName() }}', '{{ $audio->getTitle() }}');" class="btn btn-secondary">Play</a>
-                                <a href="#" class="btn btn-primary">{{ __('audios.add_to_cart') }}</a>
-                                <a href="{{route('show.audio', $audio->getId())}}" class="btn btn-warning mt-1">{{ __('audios.see_more') }}</a>
-                            </div>
+                            <a href="javascript:void(0)" onclick="return play('{{ Storage::url($audio->cover_image) }}', '{{ Storage::url($audio->audio_file) }}', '{{ $audio->author()->first()->getName() }}', '{{ $audio->getTitle() }}');" class="btn btn-secondary">Play</a>
+
+                            <form action="{{ route('audio.addToCart', $audio->getId()) }}" method="POST">
+                                @csrf
+                                <div class="form-row">
+                                    <button type="submit" class="btn btn-primary">{{ __('audios.add_to_cart') }}</button>
+                                </div>
+                            </form>
+
+                            <a href="{{route('show.audio', $audio->getId())}}" class="btn btn-warning mt-1">{{ __('audios.see_more') }}</a>
                         </div>
                     </div>
                 </div>
+            </div>
             @endforeach
         </div>
         @endforeach
@@ -58,7 +65,6 @@
 @endsection
 @section('scripts')
 <script>
-
     var inline, run;
 
     function play(img, audio, author, title) {
@@ -135,8 +141,9 @@
 
             },
             source: function(request, response) {
-                $.getJSON('{{ route('api.audios') }}?title=' + request.term,
-                    function(data) {
+                function(data) {
+                    $.getJSON(
+                        '{{ route('api.audios') }}?title=' + request.term,
 
                         var array = $.map(data, function(row) {
                             return {
@@ -164,13 +171,11 @@
                         //
                         // }
 
-                        $('#results').empty();
-                        response($.ui.autocomplete.filter(array, request.term));
+                        $('#results').empty(); response($.ui.autocomplete.filter(array, request.term));
 
                     });
             }
         });
     });
-
 </script>
 @endsection

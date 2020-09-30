@@ -7,7 +7,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
+
     @yield('head')
 
     <!-- <title>{{ config('app.name', 'PLAYZ') }}</title> -->
@@ -41,7 +41,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet" />
 
-    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"></link>
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+    </link>
     <!-- Custom CSS-->
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="{{ asset('css/player/stickyaudioplayerjquery.min.css') }}">
@@ -80,6 +81,12 @@
                     </li>
                     <li class="navbar__item">
                         <a href="{{ route('bundles') }}" class="navbar__links">{{ __('bundles.bundles') }}</a>
+                    </li>
+                    <li class="navbar__item">
+                        <a class="navbar__links" href="{{ route('audios.cart') }}">Cart</a>
+                    </li>
+                    <li class="navbar__item">
+                        <a class="navbar__links" href="{{ route('audios.removeCart') }}">Remove Cart</a>
                     </li>
                     <li class="nav-item dropdown ">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle navbar__links" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
