@@ -17,6 +17,27 @@ class AudiosController extends Controller
         return view('audios.finder')->with('audios', Audio::all());
     }
 
+    public function delete($id)
+    {
+
+        if(!Auth::check())
+            return back()->with('error','Login before delete!');
+
+        $data = [];
+        $audio = Audio::findOrFail($id);
+
+        if($audio == null)
+            return redirect()->route('home.audios');
+
+        if($audio->author()->get()->first()->getId() != Auth::user()->getId())
+            return back()->with('error','You cannot delete this audio!');
+
+        $audio->delete();
+
+        return view('audios.finder')->with('error','Audio deleted!')->with('audios', Audio::all());
+
+    }
+
     public function show($id)
     {
 

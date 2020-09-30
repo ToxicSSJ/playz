@@ -456,13 +456,13 @@
 
 .services__card h2 {
     position: absolute;
-    top: 350px;
+    top: 320px;
     left: 30px;
 }
 
 .services__card p {
     position: absolute;
-    top: 400px;
+    top: 410px;
     left: 30px;
 }
 
@@ -474,7 +474,7 @@
     border-radius: 4px;
     background: var(--main-text-color);
     position: absolute;
-    top: 440px;
+    top: 450px;
     left: 30px;
     font-size: 1rem;
 }

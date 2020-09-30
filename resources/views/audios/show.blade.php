@@ -29,6 +29,10 @@
                 <div class="col-12">
                     <img src="{{ Storage::url($audio->getCoverImage()) }}" alt="" class="img-fluid">
                     <p class="card-text m-0"><small class="text-muted">Released: {{ strtoupper(\Carbon\Carbon::parse($audio->created_at)->format('d M, Y')) }}</small></p>
+                    <p class="card-text m-0"><small class="text-muted">Author Panel: 
+                        <a href="{{ route("delete", $audio->getId()) }}"><i class="fas fa-trash" title="Delete"></i></a>
+                        <a href="#" onclick="return copyURL('{{ route("show.audio", $audio->getId()) }}');"><i class="fas fa-clipboard" title="Copy Link"></i></a>
+                    </small></p>
                 </div>
             </div>
         </div>
@@ -75,6 +79,19 @@
 <script>
 
     var inline, run;
+
+    function copyURL(url) {
+        var dummy = document.createElement("textarea");
+        // to avoid breaking orgain page when copying more words
+        // cant copy when adding below this code
+        // dummy.style.display = 'none'
+        document.body.appendChild(dummy);
+        //Be careful if you use texarea. setAttribute('value', value), which works with "input" does not work with "textarea". – Eduard
+        dummy.value = url;
+        dummy.select();
+        document.execCommand("copy");
+        document.body.removeChild(dummy);
+    }
 
     function play(img, audio, author, title) {
 
