@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('head')
+<title>{{ $audio->getTitle() }} - PlayZ</title>
+@endsection
+
 @section('content')
 <link href="{{ asset('css/show.css') }}" rel="stylesheet">
 
@@ -10,14 +14,14 @@
             <div class="col-lg-8">
                 <h1 class="display-4"><span class="badge badge-info align-center">Audio</span> {{ $audio->getTitle() }}</h1>
                 <div>
-                    <p class="text-muted mr-7 pr-7 d-inline-block">Author: <a href="{{ route('users.show', $audio->author()->first()->getId()) }}">{{ $audio->author()->first()->getName() }}</a></p>,
-                    <p class="text-muted d-inline-block">Price: {{ $audio->getPrice() }} USD</p>
+                    <p class="text-muted mr-7 pr-7 d-inline-block">{{ __('audios.author') }}: <a href="{{ route('users.show', $audio->author()->first()->getId()) }}">{{ $audio->author()->first()->getName() }}</a></p>,
+                    <p class="text-muted d-inline-block">{{ __('audios.price') }}: {{ $audio->getPrice() }} USD</p>
                 </div>
                 <p class="lead">{{ $audio->getDescription() }}</p>
                 <div class="row justify-content-left ml-1">
                     <span class="floatybox mr-3 d-inline-block">
-                        <a class="btn btn-primary btn-lg w-100" href="#" role="button">Buy</a>
-                        <p class="text-muted">No credit card required</p>
+                        <a class="btn btn-primary btn-lg w-100" href="#" role="button">{{ __('audios.buy') }}</a>
+                        <p class="text-muted">{{ __('audios.no_credit_card_required') }}</p>
                     </span>
                     <span class="floatybox d-inline-block">
                         <a class="btn btn-success btn-lg w-100" href="javascript:void(0)" onclick="return play('{{ Storage::url($audio->cover_image) }}', '{{ Storage::url($audio->audio_file) }}', '{{ $audio->author()->first()->getName() }}', '{{ $audio->getTitle() }}');" role="button">Play</a>
@@ -28,11 +32,19 @@
             <div class="col-lg-4 align-items-bottom d-flex">
                 <div class="col-12">
                     <img src="{{ Storage::url($audio->getCoverImage()) }}" alt="" class="img-fluid">
-                    <p class="card-text m-0"><small class="text-muted">Released: {{ strtoupper(\Carbon\Carbon::parse($audio->created_at)->format('d M, Y')) }}</small></p>
-                    <p class="card-text m-0"><small class="text-muted">Author Panel: 
-                        <a href="{{ route("delete", $audio->getId()) }}"><i class="fas fa-trash" title="Delete"></i></a>
-                        <a href="#" onclick="return copyURL('{{ route("show.audio", $audio->getId()) }}');"><i class="fas fa-clipboard" title="Copy Link"></i></a>
+                    <p class="card-text m-0"><small class="text-muted">{{ __('audios.released') }}: {{ strtoupper(\Carbon\Carbon::parse($audio->created_at)->format('d M, Y')) }}</small></p>
+                    @if(Auth::user()->getId() == $audio->author()->get()->first()->getId())
+                    <p class="card-text m-0"><small class="text-muted">{{ __('audios.author_panel') }}: 
+                        <a href="{{ route("delete", $audio->getId()) }}"><i class="fas fa-trash" title="{{ __('audios.delete') }}"></i></a>
+                        <a href="#" onclick="return copyURL('{{ route("show.audio", $audio->getId()) }}');"><i class="fas fa-clipboard" title="{{ __('audios.copy_link') }}"></i></a>
                     </small></p>
+                    @endif
+                    @if(Auth::user()->isAdmin())
+                    <p class="card-text m-0"><small class="text-muted">{{ __('audios.admin_panel') }}: 
+                        <a href="{{ route("delete", $audio->getId()) }}"><i class="fas fa-trash" title="{{ __('audios.delete') }}"></i></a>
+                        <a href="#" onclick="return copyURL('{{ route("show.audio", $audio->getId()) }}');"><i class="fas fa-clipboard" title="{{ __('audios.copy_link') }}"></i></a>
+                    </small></p>
+                    @endif
                 </div>
             </div>
         </div>
@@ -47,7 +59,7 @@
     <div id="results"></div>
     <br />
     <div>
-        <h2>More of {{ $audio->author()->first()->getName() }}</h2>
+        <h2>{{ __('audios.more_of') }} {{ $audio->author()->first()->getName() }}</h2>
         @foreach($audios->sortBy('id')->chunk(3) as $chunk)
         <div class="row p-5">
             @foreach($chunk as $audio)
@@ -58,13 +70,13 @@
                             <h4>{{ $audio->getTitle() }}</h4>
                             </small></p>
                             <!-- <p>{{ $audio->getDescription() }}</p> -->
-                            <p class="card-text m-0"><small class="text-muted">Author: {{ $audio->author()->first()->getName() }}</small></p>
-                            <p class="card-text m-0"><small class="text-muted">Precio: {{ $audio->getPrice() }} USD</small></p>
-                            <p class="card-text m-0"><small class="text-muted">Tipo: {{ $audio->getType() }}</small></p>
+                            <p class="card-text m-0"><small class="text-muted">{{ __('audios.author') }}: {{ $audio->author()->first()->getName() }}</small></p>
+                            <p class="card-text m-0"><small class="text-muted">{{ __('audios.price') }}: {{ $audio->getPrice() }} USD</small></p>
+                            <p class="card-text m-0"><small class="text-muted">{{ __('audios.type') }}: {{ $audio->getType() }}</small></p>
                             <div class="card-body">
-                                <a href="javascript:void(0)" onclick="return play('{{ Storage::url($audio->cover_image) }}', '{{ Storage::url($audio->audio_file) }}', '{{ $audio->author()->first()->getName() }}', '{{ $audio->getTitle() }}');" class="btn btn-secondary">Play</a>
-                                <a href="#" class="btn btn-primary">Agregar</a>
-                                <a href="{{route('show.audio', $audio->getId())}}" class="btn mt-1 btn-warning">See More</a>
+                                <a href="javascript:void(0)" onclick="return play('{{ Storage::url($audio->getCoverImage()) }}', '{{ Storage::url($audio->getAudioFile()) }}', '{{ $audio->author()->first()->getName() }}', '{{ $audio->getTitle() }}');" class="btn btn-secondary">{{ __('audios.play') }}</a>
+                                <a href="#" class="btn mt-1 btn-primary">{{ __('audios.add_to_cart') }}</a>
+                                <a href="{{route('show.audio', $audio->getId())}}" class="btn mt-1 btn-warning">{{ __('audios.see_more') }}</a>
                             </div>
                         </div>
                     </div>
@@ -137,7 +149,7 @@
                     bg = "{{ asset('img/finder/midi-bg.jpg') }}";
                 }
 
-                $('#results').append("<h4>Resultado</h4><div class=\"card\"><div class=\"card-header heading-footer container_foto\" style=\"background-image: url(" + bg + ");\"></div><div class=\"card-block text-center p-3 mt-12\"><img class=\"panel-profile-img rounded-square\" src=\"" + img + "\"><div class=\"text-left\"><p class=\"author-title text-left\"><i class=\"fas fa-file-audio\"></i><strong> " + title + "</strong></p><p>" + description + "</p><a href=\"javascript:void(0)\" id=\"play\" class=\"btn btn-primary\">{{ __('audios.play') }}</a></div></div></div>");
+                $('#results').append("<h4>{{ __('audios.results') }}</h4><div class=\"card\"><div class=\"card-header heading-footer container_foto\" style=\"background-image: url(" + bg + ");\"></div><div class=\"card-block text-center p-3 mt-12\"><img class=\"panel-profile-img rounded-square\" src=\"" + img + "\"><div class=\"text-left\"><p class=\"author-title text-left\"><i class=\"fas fa-file-audio\"></i><strong> " + title + "</strong></p><p>" + description + "</p><a href=\"javascript:void(0)\" id=\"play\" class=\"btn btn-primary\">{{ __('audios.play') }}</a></div></div></div>");
 
                 $('#play').click(function() {
 
