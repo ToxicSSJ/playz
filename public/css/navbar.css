@@ -2,86 +2,6 @@
   --pink: #f263b2;
 }
 
-.navbar-default {
-  background-color: #ffff;
-}
-
-nav .navbar-nav li a {
-  color: var(--pink);
-}
-
-nav .navbar-nav li a:hover {
-  color: white !important;
-}
-
-.login-icon {
-  color: var(--pink);
-  padding: 5px;
-}
-
-.login-icon:hover {
-  color: white;
-  cursor: pointer;
-}
-
-.navbar-toggler {
-  border-color: var(--pink);
-}
-
-.fa-bars {
-  color: var(--pink);
-}
-
-.navbar-default .navbar-nav > .active > a {
-  color: white;
-}
-
-.navbar-default .navbar-nav > .active > a > i {
-  color: white;
-}
-
-/* For Dropdowns */
-.navbar-default .navbar-nav > .active > i {
-  color: white;
-}
-
-.logo-img
-{
-  max-width: 450px;
-  max-height: 250px;
-  user-select: none;
-}
-
-.navbar-toggler
-{
-  width: 100%;
-  border: none;
-  outline-style: none;
-}
-
-.navbar-down
-{
-  border-bottom: solid 2px #D8DBE0;
-}
-
-.carrousel
-{ 
-  border-top: solid 2px #D8DBE0;
-  border-bottom: solid 2px #D8DBE0;
-  background: #f1f3f5;
-  margin-bottom: 25px;
-}
-
-body
-{
-  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-}
-
-.footer-sup
-{
-  background: linear-gradient(180deg, #C34B90 0%, #C34A90 41.15%, #C04A90 56.03%, #BB4990 66.64%, #B34890 75.22%, #A84690 82.56%, #98458F 89.08%, #86438E 94.83%, #72408D 99.9%);
-}
-
 .cart {
   position: relative;
 }
@@ -90,7 +10,7 @@ body
   position: absolute;
   left: 60%;
   bottom: 50%;
-  background: linear-gradient(180deg, #C34B90 0%, #C34A90 41.15%, #C04A90 56.03%, #BB4990 66.64%, #B34890 75.22%, #A84690 82.56%, #98458F 89.08%, #86438E 94.83%, #72408D 99.9%);
+  background: linear-gradient(180deg, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%);
   width: 20px;
   height: 20px;
   border-radius: 50%;

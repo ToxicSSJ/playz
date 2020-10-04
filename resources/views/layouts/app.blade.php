@@ -45,6 +45,7 @@
     </link>
     <!-- Custom CSS-->
     <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="{{ asset('css/player/stickyaudioplayerjquery.min.css') }}">
 
 </head>
@@ -55,7 +56,9 @@
         <!-- Navbar Section -->
         <nav class="navbar">
             <div class="navbar__container">
-                <a href="{{ url('/') }}" id="navbar__logo"><i class="fas fa-compact-disc fa-lg"></i>PLAYZ</a>
+                <a href="{{ url('/') }}" id="navbar__logo">
+                    <i class="fas fa-compact-disc fa-lg"></i>PLAYZ
+                </a>
                 <div class="navbar__toggle" id="mobile-menu">
                     <span class="bar"></span> <span class="bar"></span>
                     <span class="bar"></span>
@@ -83,10 +86,10 @@
                         <a href="{{ route('bundles') }}" class="navbar__links">{{ __('bundles.bundles') }}</a>
                     </li>
                     <li class="navbar__item">
-                        <a class="navbar__links" href="{{ route('audios.cart') }}">Cart</a>
-                    </li>
-                    <li class="navbar__item">
-                        <a class="navbar__links" href="{{ route('audios.removeCart') }}">Remove Cart</a>
+                        <a href="{{ route('audios.cart') }}" class="navbar__links cart">
+                            <i class="fas fa-shopping-cart login-icon"></i>
+                            <span id="cart_menu_num" data-action="cart-can" class="badge rounded-circle">5</span>
+                        </a>
                     </li>
                     <li class="nav-item dropdown ">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle navbar__links" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -95,7 +98,7 @@
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item navbar__links__dropdown" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
 
