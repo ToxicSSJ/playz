@@ -168,7 +168,6 @@ class AudiosController extends Controller
         $audios = $request->session()->get("audios");
         $audios[$id] = 1;
         $request->session()->put('audios', $audios);
-        // dd($audios);
         return back();
     }
 
@@ -187,8 +186,7 @@ class AudiosController extends Controller
             $data["audios"] = $audiosModels;
             return view('audios.cart')->with("data", $data);
         }
-
-        return redirect()->route('find');
+        return back()->with('error', 'There isn\'t any audio on the cart');
     }
 
     public function buy(Request $request)

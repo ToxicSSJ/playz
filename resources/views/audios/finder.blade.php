@@ -2,12 +2,12 @@
 
 @section('head')
 <title>{{ __('audios.finder_title') }} - PlayZ</title>
+<link href="{{ asset('css/finder.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
-<link href="{{ asset('css/finder.css') }}" rel="stylesheet">
-
 <div class="container">
+    @include('util.message')
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card-body">
@@ -52,7 +52,7 @@
                                 </div>
                             </form>
 
-                            <a href="{{route('show.audio', $audio->getId())}}" class="btn btn-warning mt-1">{{ __('audios.see_more') }}</a>
+                            <a href="{{route('show.audio', $audio->getId())}}" class="btn btn-warning mt-1">{{ __('audios.more_details') }}</a>
                         </div>
                     </div>
                 </div>
@@ -112,7 +112,7 @@
                     bg = "{{ asset('img/finder/midi-bg.jpg') }}";
                 }
 
-                $('#results').append("<h4>{{ __('audios.results') }}</h4><div class=\"card\"><div class=\"card-header heading-footer container_foto\" style=\"background-image: url(" + bg + ");\"></div><div class=\"card-block text-center p-3 mt-12\"><img class=\"panel-profile-img rounded-square\" src=\"" + img + "\"><div class=\"text-left\"><p class=\"author-title text-left\"><i class=\"fas fa-file-audio\"></i><strong> " + title + "</strong></p><p>" + description + "</p><a href=\"javascript:void(0)\" href=\"/audio/show/" + id + "\" id=\"play\" class=\"btn btn-primary\">{{ __('audios.play') }}</a><a href=\"/audio/show/" + id + "\" id=\"see_more\" class=\"btn btn-warning ml-1\">{{ __('audios.see_more') }}</a></div></div></div>");
+                $('#results').append("<h4>{{ __('audios.results') }}</h4><div class=\"card\"><div class=\"card-header heading-footer container_foto\" style=\"background-image: url(" + bg + ");\"></div><div class=\"card-block text-center p-3 mt-12\"><img class=\"panel-profile-img rounded-square\" src=\"" + img + "\"><div class=\"text-left\"><p class=\"author-title text-left\"><i class=\"fas fa-file-audio\"></i><strong> " + title + "</strong></p><p>" + description + "</p><a href=\"javascript:void(0)\" href=\"/audio/show/" + id + "\" id=\"play\" class=\"btn btn-primary\">{{ __('audios.play') }}</a><a href=\"/audio/show/" + id + "\" id=\"more_details\" class=\"btn btn-warning ml-1\">{{ __('audios.more_details') }}</a></div></div></div>");
 
                 $('#play').click(function() {
 

@@ -94,6 +94,7 @@
 
 .navbar__btn>a:hover {
     color: #fff;
+    text-decoration: none;
 }
 
 .button {
@@ -119,6 +120,7 @@
 .navbar__links:hover {
     color: var(--main-text-color);
     transition: all 0.3s ease;
+    text-decoration: none;
 }
 
 .navbar__links__dropdown:hover {

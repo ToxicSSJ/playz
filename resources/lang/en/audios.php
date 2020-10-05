@@ -18,7 +18,7 @@ return [
     'price' => 'Price',
     'contributors' => 'Contributors',
     'bundles' => 'Bundles',
-    'see_more' => 'See More',
+    'more_details' => 'More Details',
     'finder_title' => 'Find Audios',
     'bundles_finder_title' => 'Find Bundles',
     'add_bundle_title' => 'Add Bundle',

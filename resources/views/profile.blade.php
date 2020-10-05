@@ -5,9 +5,10 @@
 @endsection
 
 @section('content')
-
 <link rel="stylesheet" href="/css/profile.css">
+
 <div class="container emp-profile">
+    @include('util.message')
     <form method="post">
         <div class="row">
             <div class="col-md-4">
@@ -19,7 +20,7 @@
                 <div class="profile-head">
                     <h5>
                         @if(Auth::user()->isAdmin())
-                            <span class="badge badge-danger align-center">{{ __('audios.staff') }}</span>
+                        <span class="badge badge-danger align-center">{{ __('audios.staff') }}</span>
                         @endif
                         {{ Auth::user()->getName() }}
                     </h5>
