@@ -88,7 +88,13 @@
                     <li class="navbar__item">
                         <a href="{{ route('audios.cart') }}" class="navbar__links cart">
                             <i class="fas fa-shopping-cart login-icon"></i>
-                            <span id="cart_menu_num" data-action="cart-can" class="badge rounded-circle">5</span>
+                            <span id="cart_menu_num" data-action="cart-can" class="badge rounded-circle">
+                                @if (session()->has('audios'))
+                                {{ count(session()->get("audios")) }}
+                                @else
+                                0
+                                @endif
+                            </span>
                         </a>
                     </li>
                     <li class="nav-item dropdown ">

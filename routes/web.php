@@ -21,6 +21,8 @@ Route::get('/profile', 'ProfileController@profile')->name('profile');
 Route::get('/upload', 'AudiosController@upload')->name('upload');
 Route::get('/audio/show/{id}', 'AudiosController@show')->name('show.audio');
 Route::post('/audio/add-to-cart/{id}', 'AudiosController@addToCart')->name("audio.addToCart");
+// ! Remove Item By item functionality isn't working properly
+// Route::post('/cart/removeItem/{id}', 'AudiosController@removeItem')->name("audio.removeItem");
 Route::get('/cart/remove', 'AudiosController@removeCart')->name("audios.removeCart");
 Route::get('/cart/cart', 'AudiosController@cart')->name("audios.cart");
 Route::post('/cart/buy', 'AudiosController@buy')->name("audios.buy");

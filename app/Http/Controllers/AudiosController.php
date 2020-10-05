@@ -171,6 +171,20 @@ class AudiosController extends Controller
         return back();
     }
 
+    public function removeItem($id, Request $request)
+    {
+        $audios = $request->session()->get("audios");
+        if (!$audios) {
+            return redirect()->route('find')->with('error', 'There isn\'t any audio on the cart');
+        }
+        $audios = session()->pull('audios', []); // Second argument is a default value
+        if (($key = array_search($id, $audios)) !== false) {
+            unset($audios[$key]);
+        }
+        session()->put('audios', $audios);
+        return back();
+    }
+
     public function removeCart(Request $request)
     {
         $request->session()->forget('audios');
@@ -180,13 +194,26 @@ class AudiosController extends Controller
     public function cart(Request $request)
     {
         $audios = $request->session()->get("audios");
+        if (!$audios) {
+            return redirect()->route('find')->with('error', 'There isn\'t any audio on the cart');
+        }
         if ($audios) {
             $keys = array_keys($audios);
             $audiosModels = Audio::find($keys);
             $data["audios"] = $audiosModels;
+            $data["totalPrice"] = $this->getTotal($data["audios"]);
             return view('audios.cart')->with("data", $data);
         }
-        return back()->with('error', 'There isn\'t any audio on the cart');
+        return back();
+    }
+
+    public function getTotal($prices)
+    {
+        $totalPrice = 0;
+        foreach ($prices as $price) {
+            $totalPrice += $price->getPrice();
+        }
+        return $totalPrice;
     }
 
     public function buy(Request $request)

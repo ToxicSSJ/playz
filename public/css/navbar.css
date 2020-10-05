@@ -1,7 +1,3 @@
-:root {
-  --pink: #f263b2;
-}
-
 .cart {
   position: relative;
 }
@@ -10,9 +6,9 @@
   position: absolute;
   left: 60%;
   bottom: 50%;
-  background: linear-gradient(180deg, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%);
-  width: 20px;
-  height: 20px;
+  background: #f77062;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
