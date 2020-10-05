@@ -43,16 +43,15 @@
                         <p class="card-text m-0"><small class="text-muted">{{ __('audios.price') }}: {{ $audio->getPrice() }} USD</small></p>
                         <p class="card-text m-0"><small class="text-muted">{{ __('audios.type') }}: {{ $audio->getType() }}</small></p>
                         <div class="card-body">
-                            <a href="javascript:void(0)" onclick="return play('{{ Storage::url($audio->cover_image) }}', '{{ Storage::url($audio->audio_file) }}', '{{ $audio->author()->first()->getName() }}', '{{ $audio->getTitle() }}');" class="btn btn-secondary">Play</a>
-
+                            <a href="javascript:void(0)" onclick="return play('{{ Storage::url($audio->cover_image) }}', '{{ Storage::url($audio->audio_file) }}', '{{ $audio->author()->first()->getName() }}', '{{ $audio->getTitle() }}');" class="btn btn-secondary float-left mr-1">Play</a>
                             <form action="{{ route('audio.addToCart', $audio->getId()) }}" method="POST">
                                 @csrf
                                 <div class="form-row">
-                                    <button type="submit" class="btn btn-primary">{{ __('audios.add_to_cart') }}</button>
+                                    <button type="submit" class="btn btn-primary float-left mr-1">{{ __('audios.add_to_cart') }}</button>
                                 </div>
                             </form>
 
-                            <a href="{{route('show.audio', $audio->getId())}}" class="btn btn-warning mt-1">{{ __('audios.more_details') }}</a>
+                            <a href="{{route('show.audio', $audio->getId())}}" class="btn btn-warning mt-1 mb-1 float-left">{{ __('audios.more_details') }}</a>
                         </div>
                     </div>
                 </div>

@@ -25,12 +25,11 @@
         </div>
     </div>
 
-
-    <!-- Services Section -->
     @isset($audios)
     @if($audios->count() > 0)
     <div class="services">
         <h1>{{ __('audios.latest_songs_home') }}</h1>
+        <h1>{{ __('audios.latest_two_audios_home') }}</h1>
         <div class="services__container">
             @foreach($audios as $audio)
             <div class="services__card" style="background-image: linear-gradient( to bottom, rgba(0, 0, 0, 0) 0%, rgba(17, 17, 17, 0.6) 100% ), url({{ Storage::url($audio->cover_image) }});">
@@ -43,6 +42,5 @@
     </div>
     @endif
     @endisset
-
 </div>
 @endsection
