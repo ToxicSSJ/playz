@@ -6,3 +6,9 @@ All these listed songs are located in `audioExamples/audios/songs`
 - Godzilla Remix - Eminem, Mac Miller, Juice WRLD, Kendrick Lamar,J. Cole,Denzel Curry, Nitin Randhawa
 - Look Alive Remix - Eminem, Logic, J. Cole, Joyner Lucas, Drake Nitin Randhawa Remix
 - Will Remix - Eminem, Will Smith, Logic, JID, J. Cole, Joyner Lucas Nitin Randhawa Remix
+
+# Audios
+
+All these listed audios are located in `audioExamples/audios/audios`
+
+- Skedaddle Skedoodle.
