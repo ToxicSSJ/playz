@@ -37,6 +37,7 @@
                 <p>{{ $audio->getDescription() }}</p>
                 <a href="{{route('show.audio', $audio->getId())}}"><button>{{ __('audios.more_details') }}</button></a>
             </div>
+            <!-- <h1>{{Storage::url($audio->cover_image)}}</h1> -->
             @endforeach
         </div>
     </div>

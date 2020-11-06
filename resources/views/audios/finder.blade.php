@@ -43,6 +43,7 @@
                         <p class="card-text m-0"><small class="text-muted">{{ __('audios.price') }}: {{ $audio->getPrice() }} USD</small></p>
                         <p class="card-text m-0"><small class="text-muted">{{ __('audios.type') }}: {{ $audio->getType() }}</small></p>
                         <div class="card-body">
+                            <!-- <a class="btn btn-success btn-lg w-100" href="javascript:void(0)" onclick="return play('{{ Storage::url($audio->cover_image) }}', '{{ Storage::url($audio->audio_file) }}', '{{ $audio->author()->first()->getName() }}', '{{ $audio->getTitle() }}');" role="button">Play</a> -->
                             <a href="javascript:void(0)" onclick="return play('{{ Storage::url($audio->cover_image) }}', '{{ Storage::url($audio->audio_file) }}', '{{ $audio->author()->first()->getName() }}', '{{ $audio->getTitle() }}');" class="btn btn-secondary float-left mr-1">Play</a>
                             <form action="{{ route('audio.addToCart', $audio->getId()) }}" method="POST">
                                 @csrf
@@ -65,6 +66,19 @@
 @section('scripts')
 <script>
     var inline, run;
+
+    function copyURL(url) {
+        var dummy = document.createElement("textarea");
+        // to avoid breaking orgain page when copying more words
+        // cant copy when adding below this code
+        // dummy.style.display = 'none'
+        document.body.appendChild(dummy);
+        //Be careful if you use texarea. setAttribute('value', value), which works with "input" does not work with "textarea". – Eduard
+        dummy.value = url;
+        dummy.select();
+        document.execCommand("copy");
+        document.body.removeChild(dummy);
+    }
 
     function play(img, audio, author, title) {
 
@@ -97,7 +111,6 @@
             select: function(event, ui) {
 
                 var bg = "{{ asset('img/finder/sfx-bg.jpg') }}";
-                var id = ui.item.id;
                 var img = ui.item.cover_image;
                 var audio = ui.item.audio_file;
                 var author = ui.item.author_name;
@@ -111,7 +124,7 @@
                     bg = "{{ asset('img/finder/midi-bg.jpg') }}";
                 }
 
-                $('#results').append("<h4>{{ __('audios.results') }}</h4><div class=\"card\"><div class=\"card-header heading-footer container_foto\" style=\"background-image: url(" + bg + ");\"></div><div class=\"card-block text-center p-3 mt-12\"><img class=\"panel-profile-img rounded-square\" src=\"" + img + "\"><div class=\"text-left\"><p class=\"author-title text-left\"><i class=\"fas fa-file-audio\"></i><strong> " + title + "</strong></p><p>" + description + "</p><a href=\"javascript:void(0)\" href=\"/audio/show/" + id + "\" id=\"play\" class=\"btn btn-primary\">{{ __('audios.play') }}</a><a href=\"/audio/show/" + id + "\" id=\"more_details\" class=\"btn btn-warning ml-1\">{{ __('audios.more_details') }}</a></div></div></div>");
+                $('#results').append("<h4>{{ __('audios.results') }}</h4><div class=\"card\"><div class=\"card-header heading-footer container_foto\" style=\"background-image: url(" + bg + ");\"></div><div class=\"card-block text-center p-3 mt-12\"><img class=\"panel-profile-img rounded-square\" src=\"" + img + "\"><div class=\"text-left\"><p class=\"author-title text-left\"><i class=\"fas fa-file-audio\"></i><strong> " + title + "</strong></p><p>" + description + "</p><a href=\"javascript:void(0)\" id=\"play\" class=\"btn btn-primary\">{{ __('audios.play') }}</a></div></div></div>");
 
                 $('#play').click(function() {
 
@@ -140,9 +153,8 @@
 
             },
             source: function(request, response) {
-                function(data) {
-                    $.getJSON(
-                        '{{ route('api.audios') }}?title=' + request.term,
+                $.getJSON('{{ route('api.audios') }}?title=' + request.term,
+                    function(data) {
 
                         var array = $.map(data, function(row) {
                             return {
@@ -170,7 +182,8 @@
                         //
                         // }
 
-                        $('#results').empty(); response($.ui.autocomplete.filter(array, request.term));
+                        $('#results').empty();
+                        response($.ui.autocomplete.filter(array, request.term));
 
                     });
             }
