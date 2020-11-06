@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Audio;
+use Illuminate\Support\Facades\Storage;
 
 class AudioApi extends Controller
 {
@@ -29,6 +30,14 @@ class AudioApi extends Controller
         // for ($i = sizeof($audios) - 1; $i < sizeof($audios) - 3; $i--) {
         //     array_push($latestAudios, $audios[$i]);
         // }
+
+        foreach ($audios as $audio) {
+            $audio->setCoverImage(Storage::url($audio->getCoverImage()));
+            $audio->setAudioFile(Storage::url($audio->getAudioFile()));
+            $audio->setAuthorName(Storage::url($audio->author()->first()->getName()));
+            error_log($audio->getCoverImage());
+        }
+
         if (sizeof($audios) > 3) {
             array_push(
                 $latestAudios,
