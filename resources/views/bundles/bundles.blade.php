@@ -40,7 +40,7 @@
                             <p class="card-text m-0"><small class="text-muted">{{ __('audios.author') }}: {{ $bundle->author()->first()->getName() }}</small></p>
                             <p class="card-text m-0"><small class="text-muted">{{ __('audios.price') }}: {{ $bundle->getPrice() }} USD</small></p>
                             <div class="card-body">
-                                <a href="{{route('bundle.show', $bundle->getId())}}" class="btn btn-success">{{ __('audios.see_more') }}</a>
+                                <a href="{{route('bundle.show', $bundle->getId())}}" class="btn btn-success">{{ __('audios.more_details') }}</a>
                                 <a href="#" class="btn mt-1 btn-primary">{{ __('audios.add_to_cart') }}</a>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                 var title = ui.item.title;
                 var description = ui.item.description;
 
-                $('#results').append("<h4>{{ __('audios.results') }}</h4><div class=\"card\"><div class=\"card-header heading-footer container_foto\" style=\"background-image: url(" + bg + ");\"></div><div class=\"card-block text-center p-3 mt-12\"><img class=\"panel-profile-img rounded-square\" src=\"" + img + "\"><div class=\"text-left\"><p class=\"author-title text-left\"><i class=\"fas fa-file-audio\"></i><strong> " + title + "</strong></p><p>" + description + "</p><a href=\"/bundle/show/" + id + "\" id=\"play\" class=\"btn btn-primary\">{{ __('audios.see_more') }}</a></div></div></div>");
+                $('#results').append("<h4>{{ __('audios.results') }}</h4><div class=\"card\"><div class=\"card-header heading-footer container_foto\" style=\"background-image: url(" + bg + ");\"></div><div class=\"card-block text-center p-3 mt-12\"><img class=\"panel-profile-img rounded-square\" src=\"" + img + "\"><div class=\"text-left\"><p class=\"author-title text-left\"><i class=\"fas fa-file-audio\"></i><strong> " + title + "</strong></p><p>" + description + "</p><a href=\"/bundle/show/" + id + "\" id=\"play\" class=\"btn btn-primary\">{{ __('audios.more_details') }}</a></div></div></div>");
 
             },
             source: function(request, response) {

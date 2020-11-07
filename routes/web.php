@@ -21,6 +21,8 @@ Route::get('/profile', 'ProfileController@profile')->name('profile');
 Route::get('/upload', 'AudiosController@upload')->name('upload');
 Route::get('/audio/show/{id}', 'AudiosController@show')->name('show.audio');
 Route::post('/audio/add-to-cart/{id}', 'AudiosController@addToCart')->name("audio.addToCart");
+// ! Remove Item By item functionality isn't working properly
+// Route::post('/cart/removeItem/{id}', 'AudiosController@removeItem')->name("audio.removeItem");
 Route::get('/cart/remove', 'AudiosController@removeCart')->name("audios.removeCart");
 Route::get('/cart/cart', 'AudiosController@cart')->name("audios.cart");
 Route::post('/cart/buy', 'AudiosController@buy')->name("audios.buy");
@@ -39,5 +41,12 @@ Route::get('/delete/{id}', 'AudiosController@delete')->name('delete');
 Route::get('/test', 'Audio\AudioController@test')->name('test');
 Route::get('/user/{id}', 'UserController@show')->name('users.show');
 Route::get('/user/delete/{id}', 'UserController@delete')->name('users.delete');
+
+// * API Routes
+// * Audios
+Route::get('/audios', 'Api\AudioApi@index')->name("api.audio.index");
+Route::get('/audios/latest', 'Api\AudioApi@latest')->name("api.audio.latest");
+Route::get('/audios/{id}', 'Api\AudioApi@show')->name("api.audio.show");
+
 
 Auth::routes();

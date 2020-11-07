@@ -2,12 +2,11 @@
 
 @section('head')
 <title>{{ __('audios.add_audio_title') }} - PlayZ</title>
+<link href="{{ asset('css/upload.css') }}" rel="stylesheet">
+<link href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
-<link href="{{ asset('css/upload.css') }}" rel="stylesheet">
-<link href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
-
 <div class="container">
     @include('util.message')
     

@@ -18,7 +18,7 @@ return [
     'price' => 'Price',
     'contributors' => 'Contributors',
     'bundles' => 'Bundles',
-    'see_more' => 'See More',
+    'more_details' => 'More Details',
     'finder_title' => 'Find Audios',
     'bundles_finder_title' => 'Find Bundles',
     'add_bundle_title' => 'Add Bundle',
@@ -82,6 +82,7 @@ return [
     'welcome_description' => 'See what make us different.',
     'get_started' => 'Get Started',
     'latest_songs_home' => 'See what the hype is about',
+    'latest_two_audios_home' => 'our latest 2 audios',
     'staff' => 'Staff',
 
     'phases' => [
