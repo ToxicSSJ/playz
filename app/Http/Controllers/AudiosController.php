@@ -52,7 +52,7 @@ class AudiosController extends Controller
             return redirect()->route('home.audios');
         }
 
-        $audios = $audio->author()->get()->first()->audios()->get();
+        $audios = Auth::user()->audios()->get();
         $newaudios = $audios->filter(function ($audio2) use ($audio) {
             return $audio2->getId() != $audio->getId();
         })->values();
