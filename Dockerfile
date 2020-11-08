@@ -8,7 +8,7 @@ COPY .env.example .env
 COPY . /var/www/html
 COPY ./public/.htaccess /var/www/html/.htaccess
 
-RUN chown -R www-data:www-data /var/www
+RUN chown -R 777 /var/www
 WORKDIR /var/www/html
 
 RUN rm -rf ./public/storage
