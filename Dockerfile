@@ -8,7 +8,7 @@ COPY .env.example .env
 COPY . /var/www/html
 COPY ./public/.htaccess /var/www/html/.htaccess
 
-RUN chown -R 777 /var/www
+RUN chown -R www-data:www-data /var/www
 WORKDIR /var/www/html
 
 RUN rm -rf ./public/storage
@@ -27,6 +27,7 @@ RUN php artisan db:seed
 RUN php artisan storage:link
 
 RUN chmod -R 775 storage
+RUN chmod 777 -R /var/www/html/storage/
 RUN a2enmod rewrite
 RUN service apache2 restart
 # CMD php artisan serve --host=0.0.0.0 --port=3000
