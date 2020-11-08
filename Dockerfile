@@ -26,7 +26,8 @@ RUN php artisan migrate
 RUN php artisan db:seed
 RUN php artisan storage:link
 
-RUN chmod -R 777 storage
+RUN chmod -R 775 storage
+RUN chmod -R 775 ./var/www/html/storage
 RUN a2enmod rewrite
 RUN service apache2 restart
 # CMD php artisan serve --host=0.0.0.0 --port=3000
