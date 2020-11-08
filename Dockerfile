@@ -12,7 +12,7 @@ RUN chown -R www-data:www-data /var/www
 WORKDIR /var/www/html
 
 RUN rm -rf ./public/storage
-RUN rm ./storage/app/public
+RUN rm -rf ./storage/app/public
 COPY ./php.ini /usr/local/etc/php/conf.d
 RUN composer install \
     --ignore-platform-reqs \
