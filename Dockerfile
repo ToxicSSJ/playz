@@ -16,6 +16,7 @@ RUN composer install \
 RUN php artisan key:generate
 RUN php artisan migrate
 RUN chmod -R 777 storage
-RUN a2enmod rewrite
-RUN php artisan serve --port=3000
-RUN service apache2 restart
+# RUN a2enmod rewrite
+CMD php artisan serve --port=3000
+EXPOSE 3000
+# RUN service apache2 restart
