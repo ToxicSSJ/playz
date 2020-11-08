@@ -6,7 +6,6 @@ COPY .env.example .env
 COPY . /var/www/html
 COPY ./public/.htaccess /var/www/html/.htaccess
 RUN chown -R www-data:www-data /var/www
-RUN chmod -R 755 /var/www/storage
 WORKDIR /var/www/html
 
 COPY ./php.ini /usr/local/etc/php/conf.d
