@@ -11,8 +11,6 @@ COPY ./public/.htaccess /var/www/html/.htaccess
 RUN chown -R www-data:www-data /var/www
 WORKDIR /var/www/html
 
-RUN rm -rf ./public/storage
-RUN rm -rf ./storage/app/public
 COPY ./php.ini /usr/local/etc/php/conf.d
 RUN composer install \
     --ignore-platform-reqs \
@@ -26,8 +24,7 @@ RUN php artisan migrate
 RUN php artisan db:seed
 RUN php artisan storage:link
 
-RUN chmod -R 775 storage
-RUN chmod 777 -R /var/www/html/storage/
+RUN chmod -R 777 storage
 RUN a2enmod rewrite
 RUN service apache2 restart
 # CMD php artisan serve --host=0.0.0.0 --port=3000
