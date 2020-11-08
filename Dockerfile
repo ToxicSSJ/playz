@@ -5,7 +5,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 COPY .env.example .env
 COPY . /var/www/html
 COPY ./public/.htaccess /var/www/html/.htaccess
+COPY ./php.ini /usr/local/etc/php/conf.d
 WORKDIR /var/www/html
+
 RUN composer install \
     --ignore-platform-reqs \
     --no-interaction \
@@ -16,7 +18,8 @@ RUN composer install \
 RUN php artisan key:generate
 RUN php artisan migrate
 RUN chmod -R 777 storage
-# RUN a2enmod rewrite
-CMD php artisan serve --host=0.0.0.0 --port=3000
-EXPOSE 3000
-# RUN service apache2 restart
+RUN a2enmod rewrite
+RUN service apache2 restart
+# CMD php artisan serve --host=0.0.0.0 --port=3000
+# EXPOSE 3000
+EXPOSE 80

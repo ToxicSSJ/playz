@@ -25,7 +25,7 @@
                         {{ Auth::user()->getName() }}
                     </h5>
                     <h6>
-                        Dj with Love
+                        Dj with Love - Test
                     </h6>
                     <p class="proile-rating">WALLET: <span>${{ Auth::user()->wallet }}</span></p>
                     <nav>
