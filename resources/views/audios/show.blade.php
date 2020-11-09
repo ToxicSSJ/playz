@@ -65,7 +65,7 @@
             @foreach($chunk as $audio)
                 <div class="col d-flex align-top align-items-stretch">
                     <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="{{ Storage::url($audio->cover_image) }}" alt="Card image cap">
+                        <img class="card-img-top" src="{{ Storage::url($audio->getCoverImage()) }}" alt="Card image cap">
                         <div class="card-body">
                             <h4>{{ $audio->getTitle() }}</h4>
                             </small></p>

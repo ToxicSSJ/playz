@@ -29,7 +29,6 @@ RUN php artisan key:generate
 RUN php artisan migrate
 RUN php artisan storage:link
 
-# RUN setenforce 0
 # RUN a2enmod rewrite
 # RUN service apache2 restart
 CMD php artisan serve --host=0.0.0.0 --port=3000
