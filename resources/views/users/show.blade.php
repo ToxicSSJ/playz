@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-
 <link rel="stylesheet" href="/css/profile.css">
+
 <div class="container emp-profile">
     <form method="post">
         <div class="row">
@@ -56,7 +56,7 @@
                             <img class="card-img-top" src="{{ Storage::url($audio->getCoverImage()) }}" height="300" width="50" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $audio->getTitle() }}</h5>
-                                <p class="card-text">{{ $audio->getDescription() }}.</p>
+                                <p class="card-text">{{ $audio->getDescription() }}</p>
                                 <a href="{{route('show.audio', $audio->getId())}}" class="btn btn-warning mt-1">{{ __('audios.more_details') }}</a>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                             <img class="card-img-top" src="{{ Storage::url($bundle->getCoverImage()) }}" height="300" width="50" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $bundle->getTitle() }}</h5>
-                                <p class="card-text">{{ $bundle->getDescription() }}.</p>
+                                <p class="card-text">{{ $bundle->getDescription() }}</p>
                                 <a href="{{route('bundle.show', $bundle->getId())}}" class="btn btn-warning mt-1">{{ __('audios.more_details') }}</a>
                             </div>
                         </div>

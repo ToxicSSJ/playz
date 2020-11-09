@@ -98,8 +98,9 @@
                         </a>
                     </li>
                     <li class="nav-item dropdown ">
+
                         <a id="navbarDropdown" class="nav-link dropdown-toggle navbar__links" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}
+                            {{ Auth::user()->getName() }}
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -110,6 +111,38 @@
 
                             <a class="dropdown-item navbar__links__dropdown" href="{{ route('profile') }}">
                                 {{ __('profile.profile') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown ">
+                    
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle navbar__links" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        @if (Auth::user()->getLocale() == "es")
+                            <center>
+                                <img src="{{ asset('img/flags/mx.png') }}" style="height: 28px; margin-right: 5px;"> </img> Español
+                            </center>
+                        @else
+                            <center>
+                                <img src="{{ asset('img/flags/us.png') }}" style="height: 28px; margin-right: 5px;"> </img> English
+                            </center>
+                        @endif
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item navbar__links__dropdown" href="{{ route('lang.change', ['lang' => 'es']) }}">
+                                <center>
+                                <img src="{{ asset('img/flags/mx.png') }}" style="height: 28px; margin-right: 5px;"> </img> Español
+                                </center>
+                            </a>
+
+                            <a class="dropdown-item navbar__links__dropdown" href="{{ route('lang.change', ['lang' => 'en']) }}">
+                            <center>
+                                <img src="{{ asset('img/flags/us.png') }}" style="height: 28px; margin-right: 5px;"> </img> English
+                                </center>
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

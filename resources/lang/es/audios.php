@@ -4,7 +4,7 @@ return [
 
     'audio' => 'Audio',
     'audios' => 'Audios',
-    'home' => 'Home',
+    'home' => 'Inicio',
     'find' => 'Find',
     'find_audio' => 'Find Audio',
     'upload' => 'Upload',
