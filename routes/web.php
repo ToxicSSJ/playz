@@ -42,11 +42,10 @@ Route::get('/test', 'Audio\AudioController@test')->name('test');
 Route::get('/user/{id}', 'UserController@show')->name('users.show');
 Route::get('/user/delete/{id}', 'UserController@delete')->name('users.delete');
 
-// * API Routes
-// * Audios
 Route::get('/audios', 'Api\AudioApi@index')->name("api.audio.index");
 Route::get('/audios/latest', 'Api\AudioApi@latest')->name("api.audio.latest");
 Route::get('/audios/{id}', 'Api\AudioApi@show')->name("api.audio.show");
 
+Route::get('/lang/{lang}', 'LangController@lang')->name("lang.change");
 
 Auth::routes();
