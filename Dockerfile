@@ -27,6 +27,7 @@ RUN composer install \
 
 RUN php artisan key:generate
 RUN php artisan migrate
+RUN php artisan storage:link
 
 # RUN setenforce 0
 # RUN a2enmod rewrite
