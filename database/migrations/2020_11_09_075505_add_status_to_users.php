@@ -14,7 +14,8 @@ class AddStatusToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('status');
+            $table->enum('locale', ['es_MX', 'en_US'])->default('es_MX');
+            $table->string('status')->default('Hello everyone!');
         });
     }
 
@@ -26,6 +27,7 @@ class AddStatusToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('locale');
             $table->dropColumn('status');
         });
     }

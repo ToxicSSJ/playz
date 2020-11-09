@@ -21,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id', 'name', 'email', 'password', 'wallet'
+        'id', 'name', 'email', 'password', 'wallet', 'status', 'locale'
     ];
 
     /**
@@ -59,8 +59,17 @@ class User extends Authenticatable
         $this->attributes['id'] = $id;
     }
 
+    public function setLocale($locale)
+    {
+        $this->attributes['locale'] = $locale;
+    }
+
     public function getName() {
         return $this->attributes['name'];
+    }
+
+    public function getStatus() {
+        return $this->attributes['status'];
     }
 
     public function getEmail() {
@@ -69,6 +78,10 @@ class User extends Authenticatable
 
     public function getWallet() {
         return $this->attributes['wallet'];
+    }
+
+    public function getLocale() {
+        return $this->attributes['locale'];
     }
 
     public function creditCard() {
