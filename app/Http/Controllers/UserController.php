@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AudioBundle;
 use App\Audio;
 use App\User;
 use Auth;
@@ -15,10 +16,12 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $audios = Audio::where('author_id', $id)->get();
+        $bundles = AudioBundle::where('author_id', $id)->get();
 
         return view('users.show', [
             'user' => $user,
             'audios' => $audios,
+            'bundles' => $bundles,
         ]);
     }
 

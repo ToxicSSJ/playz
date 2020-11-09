@@ -24,7 +24,7 @@
                         {{ $user->getName() }}
                     </h5>
                     <h6>
-                        Dj with Love
+                        {{ $user->getStatus() }}
                     </h6>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -48,26 +48,36 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="row">
-                            @foreach($audios as $audio)
-                            <div class="card">
-                                <img class="card-img-top" src="{{ Storage::url($audio->getCoverImage()) }}" height="300" width="50" alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $audio->getTitle() }}</h5>
-                                    <p class="card-text">{{ $audio->getDescription() }}.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
+            
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-audios" role="tabpanel" aria-labelledby="nav-audios-tab">
+                        @foreach($audios as $audio)
+                        <div class="card">
+                            <img class="card-img-top" src="{{ Storage::url($audio->getCoverImage()) }}" height="300" width="50" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $audio->getTitle() }}</h5>
+                                <p class="card-text">{{ $audio->getDescription() }}.</p>
+                                <a href="{{route('show.audio', $audio->getId())}}" class="btn btn-warning mt-1">{{ __('audios.more_details') }}</a>
                             </div>
-                            <br>
-                            @endforeach
                         </div>
-
-
+                        <br>
+                        @endforeach
                     </div>
-
+                    <div class="tab-pane fade" id="nav-bundles" role="tabpanel" aria-labelledby="nav-bundles-tab">
+                        @foreach($bundles as $bundle)
+                        <div class="card">
+                            <img class="card-img-top" src="{{ Storage::url($bundle->getCoverImage()) }}" height="300" width="50" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $bundle->getTitle() }}</h5>
+                                <p class="card-text">{{ $bundle->getDescription() }}.</p>
+                                <a href="{{route('bundle.show', $bundle->getId())}}" class="btn btn-warning mt-1">{{ __('audios.more_details') }}</a>
+                            </div>
+                        </div>
+                        <br>
+                        @endforeach
+                    </div>
                 </div>
+
             </div>
         </div>
     </form>

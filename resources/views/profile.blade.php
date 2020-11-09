@@ -20,14 +20,14 @@
                 <div class="profile-head">
                     <h5>
                         @if(Auth::user()->isAdmin())
-                        <span class="badge badge-danger align-center">{{ __('audios.staff') }}</span>
+                            <span class="badge badge-danger align-center">{{ __('audios.staff') }}</span>
                         @endif
                         {{ Auth::user()->getName() }}
                     </h5>
                     <h6>
-                        Dj with Love - Test
+                        {{ Auth::user()->getStatus() }}
                     </h6>
-                    <p class="proile-rating">WALLET: <span>${{ Auth::user()->wallet }}</span></p>
+                    <p class="proile-rating">WALLET: <span>${{ Auth::user()->getWallet() }}</span></p>
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-audios-tab" data-toggle="tab" href="#nav-audios" role="tab" aria-controls="nav-audios" aria-selected="true">Audios</a>
@@ -45,20 +45,21 @@
             <div class="col-md-4">
                 <div class="profile-work">
                     <p>USER ID</p>
-                    <a href="">{{ Auth::user()->id }}</a>
+                    <a href="">{{ Auth::user()->getId() }}</a>
                     <p>EMAIL</p>
-                    <a href="">{{ Auth::user()->email }}</a>
+                    <a href="">{{ Auth::user()->getEmail() }}</a>
                 </div>
             </div>
             <div class="col-md-8">
+            
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-audios" role="tabpanel" aria-labelledby="nav-audios-tab">
                         @foreach($audios as $audio)
                         <div class="card">
-                            <img class="card-img-top" src="{{ Storage::url($audio->cover_image) }}" height="300" width="50" alt="Card image cap">
+                            <img class="card-img-top" src="{{ Storage::url($audio->getCoverImage()) }}" height="300" width="50" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $audio->title }}</h5>
-                                <p class="card-text">{{ $audio->description }}.</p>
+                                <h5 class="card-title">{{ $audio->getTitle() }}</h5>
+                                <p class="card-text">{{ $audio->getDescription() }}.</p>
                                 <a href="{{route('show.audio', $audio->getId())}}" class="btn btn-warning mt-1">{{ __('audios.more_details') }}</a>
                             </div>
                         </div>
@@ -68,10 +69,10 @@
                     <div class="tab-pane fade" id="nav-bundles" role="tabpanel" aria-labelledby="nav-bundles-tab">
                         @foreach($bundles as $bundle)
                         <div class="card">
-                            <img class="card-img-top" src="{{ Storage::url($bundle->cover_image) }}" height="300" width="50" alt="Card image cap">
+                            <img class="card-img-top" src="{{ Storage::url($bundle->getCoverImage()) }}" height="300" width="50" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $bundle->title }}</h5>
-                                <p class="card-text">{{ $bundle->description }}.</p>
+                                <h5 class="card-title">{{ $bundle->getTitle() }}</h5>
+                                <p class="card-text">{{ $bundle->getDescription() }}.</p>
                                 <a href="{{route('bundle.show', $bundle->getId())}}" class="btn btn-warning mt-1">{{ __('audios.more_details') }}</a>
                             </div>
                         </div>
