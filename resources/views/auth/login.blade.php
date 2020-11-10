@@ -40,12 +40,6 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12 row-block">
-                                <a href="{{ url('auth/google') }}" class="btn btn-lg btn-primary btn-block">
-                                <strong>Login With Google</strong>
-                                </a>
-                            </div>
-
                             <div class="form-group row">
                                 <div class="col-md-6 offset-md-4">
                                     <div class="form-check">
@@ -62,6 +56,10 @@
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Login') }}
+                                    </button>
+
+                                    <button type="submit" class="btn btn-danger">
+                                    <img src="{{ asset('img/google.png') }}" style="height: 28px; margin-right: 5px;"> </img> {{ __('audios.google_login') }}
                                     </button>
 
                                     @if (Route::has('password.request'))

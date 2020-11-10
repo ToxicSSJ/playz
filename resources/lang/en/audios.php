@@ -87,6 +87,7 @@ return [
     'language' => 'Idioma',
     'meetings' => 'Community Meetings',
     'place' => 'Place',
+    'google_login' => 'Login with Google',
 
     'phases' => [
         'phase' => 'Phase'
