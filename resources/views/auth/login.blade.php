@@ -58,9 +58,9 @@
                                         {{ __('Login') }}
                                     </button>
 
-                                    <button type="submit" class="btn btn-danger">
+                                    <a href="{{ url('auth/google') }}" class="btn btn-danger">
                                     <img src="{{ asset('img/google.png') }}" style="height: 28px; margin-right: 5px;"> </img> {{ __('audios.google_login') }}
-                                    </button>
+                                    </a>
 
                                     @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
