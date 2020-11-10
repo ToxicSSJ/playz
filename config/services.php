@@ -30,4 +30,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'google' => [
+        'client_id' => '900181535166-tsqasgmr9q95676815mcnvghn2g5v62b.apps.googleusercontent.com',
+        'client_secret' => 'tUn00crTOwMCCsgP6bG9aRjt',
+        'redirect' => 'http://playz.pw',
+    ],
+
 ];

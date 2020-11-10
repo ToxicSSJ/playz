@@ -40,8 +40,53 @@
             <!-- <h1>{{Storage::url($audio->cover_image)}}</h1> -->
             @endforeach
         </div>
+        <br>
     </div>
     @endif
     @endisset
+    <section class="meetings">
+        <div class="services ">
+            <div class="row ml-5 mr-5">
+                <div class="col-6">
+                <h1>{{ __('audios.meetings') }}</h1>
+                </div>
+                <div class="col-6 text-right">
+                    <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+                        <i class="fa fa-arrow-left"></i>
+                    </a>
+                    <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
+                        <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="col-12">
+                    <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            @foreach($meetings->chunk(3) as $chunk)
+                                @if($loop->index == 0)
+                                <div class="carousel-item active">
+                                @else
+                                <div class="carousel-item">
+                                @endif
+                                <div class="row">
+                                    @foreach($chunk as $meet)
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h4 class="card-title"><i class="fas fa-calendar-alt"></i> <strong>{{ $meet['date'] }}</strong></h4>
+                                                <p class="card-text"><strong>{{ __('audios.place') }}:</strong> {{ $meet['place'] }}</p>
+                                                <p class="card-text">{{ $meet['details'] }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 @endsection

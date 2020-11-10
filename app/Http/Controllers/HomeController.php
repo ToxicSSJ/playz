@@ -29,8 +29,11 @@ class HomeController extends Controller
         $audios = Audio::all();
         $date = \Carbon\Carbon::now();
 
+        $meetings = json_decode(file_get_contents('http://ec2-184-72-114-127.compute-1.amazonaws.com/public/api/v2/meetings'), true);
+        error_log($meetings['data'][0]['place']);
+
         $audios = $audios->sortBy('created_at')->reverse()->slice(0, 2);
-        return view('welcome')->with('audios', $audios);
+        return view('welcome')->with('audios', $audios)->with('meetings', collect($meetings['data']));
         
     }
 }
