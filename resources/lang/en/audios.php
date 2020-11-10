@@ -85,6 +85,8 @@ return [
     'latest_two_audios_home' => 'our latest 2 audios',
     'staff' => 'Staff',
     'language' => 'Idioma',
+    'meetings' => 'Community Meetings',
+    'place' => 'Place',
 
     'phases' => [
         'phase' => 'Phase'
