@@ -1,7 +1,5 @@
 <?php
 
 return [
-
-    'bundles' => 'Bundles'
-
+    'bundles' => 'Paquetes'
 ];
