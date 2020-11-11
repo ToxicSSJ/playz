@@ -38,6 +38,9 @@
                 </div>
             </div>
             <div class="col-md-2">
+                <a href="{{ url('charge') }}" class="btn btn-info mb-2 rounded-pill">
+                {{ __('audios.charge') }}
+                </a>
                 <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
             </div>
         </div>

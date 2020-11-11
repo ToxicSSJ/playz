@@ -26,4 +26,36 @@ class ProfileController extends Controller
             'bundles' => $bundles,
         ]);
     }
+
+    public function purchase($package)
+    {
+
+        if (!Auth::check())
+            return back()->with('error', 'Login before charge!');
+
+        switch ($package)
+        {
+            case "small":
+                Auth::user()->setWallet(Auth::user()->getWallet() + 12);
+                Auth::user()->save();
+                return back()->with('success', 'Charge completed!');
+            case "medium":
+                Auth::user()->setWallet(Auth::user()->getWallet() + 40);
+                Auth::user()->save();
+                return back()->with('success', 'Charge completed!');
+            case "dj":
+                Auth::user()->setWallet(Auth::user()->getWallet() + 130);
+                Auth::user()->save();
+                return back()->with('success', 'Charge completed!');
+            default:
+                return back()->with('error', 'Bad package!');
+        }
+
+    }
+
+    public function charge()
+    {
+        return view('charge');
+    }
+
 }
