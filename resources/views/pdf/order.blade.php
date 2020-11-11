@@ -10,7 +10,7 @@
 <body>
     <center>
         <div class="navbar__container">
-            <a href="{{ url('/') }}" id="navbar__logo"> 
+            <a href="{{ url('/') }}" id="navbar__logo">
                 <i class="fas fa-compact-disc fa-lg"></i>PlayZ - {{ __('audios.invoice') }} (#{{ $order->id }})
             </a>
         </div>
