@@ -20,6 +20,16 @@ class Order extends Model
         $this->attributes['id'] = $id;
     }
 
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author_id', 'id');
+    }
+
+    public function setAuthor($author_id)
+    {
+        $this->attributes['author_id'] = $author_id;
+    }
+
     public function getTotal()
     {
         return $this->attributes['total'];

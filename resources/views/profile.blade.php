@@ -20,7 +20,7 @@
                 <div class="profile-head">
                     <h5>
                         @if(Auth::user()->isAdmin())
-                            <span class="badge badge-danger align-center">{{ __('audios.staff') }}</span>
+                        <span class="badge badge-danger align-center">{{ __('audios.staff') }}</span>
                         @endif
                         {{ Auth::user()->getName() }}
                     </h5>
@@ -32,6 +32,7 @@
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-audios-tab" data-toggle="tab" href="#nav-audios" role="tab" aria-controls="nav-audios" aria-selected="true">Audios</a>
                             <a class="nav-item nav-link" id="nav-bundles-tab" data-toggle="tab" href="#nav-bundles" role="tab" aria-controls="nav-bundles" aria-selected="false">Bundles</a>
+                            <a class="nav-item nav-link" id="nav-orders-tab" data-toggle="tab" href="#nav-orders" role="tab" aria-controls="nav-orders" aria-selected="false">Orders</a>
                         </div>
                     </nav>
 
@@ -54,7 +55,7 @@
                 </div>
             </div>
             <div class="col-md-8">
-            
+
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-audios" role="tabpanel" aria-labelledby="nav-audios-tab">
                         @foreach($audios as $audio)
@@ -69,6 +70,7 @@
                         <br>
                         @endforeach
                     </div>
+
                     <div class="tab-pane fade" id="nav-bundles" role="tabpanel" aria-labelledby="nav-bundles-tab">
                         @foreach($bundles as $bundle)
                         <div class="card">
@@ -77,6 +79,28 @@
                                 <h5 class="card-title">{{ $bundle->getTitle() }}</h5>
                                 <p class="card-text">{{ $bundle->getDescription() }}.</p>
                                 <a href="{{route('bundle.show', $bundle->getId())}}" class="btn btn-warning mt-1">{{ __('audios.more_details') }}</a>
+                            </div>
+                        </div>
+                        <br>
+                        @endforeach
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-orders" role="tabpanel" aria-labelledby="nav-orders-tab">
+                        @foreach($orders as $order)
+                        <div class="card">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Order number: {{ $order->getId() }}</h5>
+                                <p class="card-text">Total Cost: ${{ $order->getTotal() }}.</p>
+                                <ul>
+                                    @foreach($items as $item)
+                                    @if($item->getOrderId() === $order->getId())
+                                    <li>
+                                        <a href="{{route('show.audio', $item->getAudioId())}}" class="card-text">Audio ID: {{ $item->getAudioId() }}.</a>
+                                    </li>
+                                    @endif
+                                    @endforeach
+                                </ul>
                             </div>
                         </div>
                         <br>
