@@ -52,6 +52,7 @@ Route::get('/lang/{lang}', 'LangController@lang')->name("lang.change");
 
 Route::get('/purchase/{package}', 'ProfileController@purchase')->name("profile.purchase");
 Route::get('/charge', 'ProfileController@charge')->name('charge');
+Route::get('/generate/{orderId}', 'OrderController@generatePDF')->name('generate');
     
 Route::get('auth/google', 'Auth\LoginController@redirectToGoogle');
 Route::get('auth/google/callback', 'Auth\LoginController@handleGoogleCallback');

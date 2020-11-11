@@ -30,6 +30,16 @@ class Item extends Model
         $this->attributes['quantity'] = $q;
     }
 
+    public function getPrice()
+    {
+        return $this->attributes['price'];
+    }
+
+    public function setPrice($q)
+    {
+        $this->attributes['price'] = $q;
+    }
+
     public function getAudioId()
     {
         return $this->attributes['audio_id'];

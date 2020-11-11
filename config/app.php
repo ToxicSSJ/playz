@@ -177,6 +177,7 @@ return [
 
         // PDFS
         Barryvdh\DomPDF\ServiceProvider::class,
+        App\Providers\PDFServiceProvider::class,
 
     ],
 

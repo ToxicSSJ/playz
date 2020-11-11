@@ -230,11 +230,12 @@ class AudiosController extends Controller
             $keys = array_keys($audios);
             for ($i = 0; $i < count($keys); $i++) {
                 $item = new Item();
+                $currentAudio = Audio::find($keys[$i]);
                 $item->setAudioId($keys[$i]);
                 $item->setOrderId($order->getId());
                 $item->setQuantity($audios[$keys[$i]]);
+                $item->setPrice($currentAudio->getPrice());
                 $item->save();
-                $currentAudio = Audio::find($keys[$i]);
                 $totalPrice = $totalPrice + $currentAudio->getPrice() * $audios[$keys[$i]];
             }
 

@@ -90,17 +90,16 @@
                         <div class="card">
 
                             <div class="card-body">
-                                <h5 class="card-title">Order number: {{ $order->getId() }}</h5>
-                                <p class="card-text">Total Cost: ${{ $order->getTotal() }}.</p>
+                                <h5 class="card-title">{{ __('audios.order_number') }}: {{ $order->getId() }}</h5>
+                                <p class="card-text">{{ __('audios.total_cost') }}: ${{ $order->getTotal() }}.</p>
                                 <ul>
                                     @foreach($items as $item)
                                     @if($item->getOrderId() === $order->getId())
-                                    <li>
-                                        <a href="{{route('show.audio', $item->getAudioId())}}" class="card-text">Audio ID: {{ $item->getAudioId() }}.</a>
-                                    </li>
+                                    - <a href="{{route('show.audio', $item->audio()->get()->first()->getId())}}" class="card-text">Audio: {{ $item->audio()->get()->first()->getTitle() }}.</a>
                                     @endif
                                     @endforeach
                                 </ul>
+                                <a href="{{route('generate', $order->getId())}}" class="btn btn-info">{{ __('audios.report') }}</a>
                             </div>
                         </div>
                         <br>
