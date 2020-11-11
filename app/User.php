@@ -99,15 +99,15 @@ class User extends Authenticatable
     }
 
     public function creditCard() {
-        return $this->hasOne(CreditCard::class, 'user_id', 'user_id');
+        return $this->hasOne(CreditCard::class, 'user_id', 'id');
     }
 
     public function library() {
-        return $this->hasOne(Library::class, 'user_id', 'user_id');
+        return $this->hasOne(Library::class, 'user_id', 'id');
     }
 
     public function orders() {
-        return $this->hasMany(Order::class, 'user_id', 'user_id');
+        return $this->hasMany(Order::class, 'author_id', 'id');
     }
 
     public function audios() {
@@ -115,7 +115,7 @@ class User extends Authenticatable
     }
 
     public function bundles() {
-        return $this->hasMany(AudioBundle::class, 'author_id', 'author_id');
+        return $this->hasMany(AudioBundle::class, 'author_id', 'id');
     }
 
 }

@@ -20,12 +20,16 @@
                 <p class="lead">{{ $audio->getDescription() }}</p>
                 <div class="row justify-content-left ml-1">
                     <span class="floatybox mr-3 d-inline-block">
+                        @if(!$purchased)
                         <form action="{{ route('audio.addToCart', $audio->getId()) }}" method="POST">
                             @csrf
                             <div class="form-row">
                                 <button type="submit" class="btn btn-primary float-left mr-1">{{ __('audios.add_to_cart') }}</button>
                             </div>
                         </form>
+                        @else
+                        <a href="#" class="btn btn-info"> {{ __('audios.download') }}</a>
+                        @endif
                         <!-- <a class="btn btn-primary btn-lg w-100" href="#" role="button">{{ __('audios.buy') }}</a> -->
                         <p class="text-muted">{{ __('audios.no_credit_card_required') }}</p>
                     </span>

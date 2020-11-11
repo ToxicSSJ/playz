@@ -101,6 +101,7 @@ return [
     'report' => 'Generar Reporte',
     'order_number' => 'Order Number',
     'total_cost' => 'Total Price',
+    'download' => 'Download',
 
     'phases' => [
         'phase' => 'Phase'

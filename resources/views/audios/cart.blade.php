@@ -58,7 +58,7 @@
                 @foreach($data["audios"] as $audio)
                 <div class="cart-row">
                     <div style="flex:1">
-                        <img class="row-image" src="{{ Storage::url($audio->cover_image) }}">
+                        <img class="row-image" src="{{ Storage::url($audio->getCoverImage()) }}">
                     </div>
                     <div style="flex:3">
                         <p>{{ $audio->getTitle() }}</p>

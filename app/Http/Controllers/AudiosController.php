@@ -52,12 +52,27 @@ class AudiosController extends Controller
             return redirect()->route('home.audios');
         }
 
-        $audios = Auth::user()->audios()->get();
+        $audios = $audio->author()->get()->first()->audios()->get();
         $newaudios = $audios->filter(function ($audio2) use ($audio) {
             return $audio2->getId() != $audio->getId();
         })->values();
 
-        return view('audios.show', ['title' => trans('messages.audios_show_title')])->with("audio", $audio)->with("audios", $newaudios);
+        $purchased = false;
+
+        if (Auth::check()) {
+            $user = Auth::user();
+            foreach ($user->orders()->get() as $order) {
+                foreach ($order->items()->get() as $item) {
+                    if($item->getAudioId() == $audio->getId()) {
+                        $purchased = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return view('audios.show', ['title' => trans('messages.audios_show_title'), 'purchased' => $purchased])->with("audio", $audio)->with("audios", $newaudios);
+
     }
 
     public function upload()
