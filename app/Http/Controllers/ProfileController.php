@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Audio;
 use App\AudioBundle;
 use App\Order;
+use App\Item;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Console\StorageLinkCommand;
 
@@ -23,11 +24,13 @@ class ProfileController extends Controller
         $audios = Audio::where('author_id', Auth::user()->id)->get();
         $bundles = AudioBundle::where('author_id', Auth::user()->id)->get();
         $orders = Order::where('author_id', Auth::user()->id)->get();
+        $items = Item::All();
 
         return view('profile', [
             'audios' => $audios,
             'bundles' => $bundles,
-            'orders' => $orders
+            'orders' => $orders,
+            'items' => $items
         ]);
     }
 }

@@ -20,7 +20,7 @@
                 <div class="profile-head">
                     <h5>
                         @if(Auth::user()->isAdmin())
-                            <span class="badge badge-danger align-center">{{ __('audios.staff') }}</span>
+                        <span class="badge badge-danger align-center">{{ __('audios.staff') }}</span>
                         @endif
                         {{ Auth::user()->getName() }}
                     </h5>
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="col-md-8">
-            
+
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-audios" role="tabpanel" aria-labelledby="nav-audios-tab">
                         @foreach($audios as $audio)
@@ -67,7 +67,7 @@
                         <br>
                         @endforeach
                     </div>
-                    
+
                     <div class="tab-pane fade" id="nav-bundles" role="tabpanel" aria-labelledby="nav-bundles-tab">
                         @foreach($bundles as $bundle)
                         <div class="card">
@@ -83,13 +83,22 @@
                     </div>
 
                     <div class="tab-pane fade" id="nav-orders" role="tabpanel" aria-labelledby="nav-orders-tab">
-                        @foreach($bundles as $bundle)
+                        @foreach($orders as $order)
                         <div class="card">
-                            <img class="card-img-top" src="{{ Storage::url($bundle->getCoverImage()) }}" height="300" width="50" alt="Card image cap">
+
                             <div class="card-body">
-                                <h5 class="card-title">{{ $bundle->getTitle() }}</h5>
-                                <p class="card-text">{{ $bundle->getDescription() }}.</p>
-                                <a href="{{route('bundle.show', $bundle->getId())}}" class="btn btn-warning mt-1">{{ __('audios.more_details') }}</a>
+                                <h5 class="card-title">Order number: {{ $order->getId() }}</h5>
+                                <p class="card-text">Total Cost: ${{ $order->getTotal() }}.</p>
+                                <ul>
+                                    @foreach($items as $item)
+                                    @if($item->getOrderId() === $order->getId())
+                                    <li>
+                                        <a href="{{route('show.audio', $item->getAudioId())}}" class="card-text">Audio ID: {{ $item->getAudioId() }}.</a>
+                                    </li>
+                                    @endif
+                                    @endforeach
+                                </ul>
+                                <a href="#" class="btn btn-warning mt-1">{{ __('audios.more_details') }}</a>
                             </div>
                         </div>
                         <br>
