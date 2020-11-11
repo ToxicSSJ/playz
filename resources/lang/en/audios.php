@@ -95,6 +95,9 @@ return [
     'dj' => 'Paquete de DJ',
     'credits' => 'creditos',
     'current_credits' => 'Current Credits',
+    'invoice' => 'Recibo',
+    'total' => 'Total',
+    'date' => 'Fecha',
 
     'phases' => [
         'phase' => 'Phase'

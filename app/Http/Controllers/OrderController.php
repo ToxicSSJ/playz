@@ -11,11 +11,17 @@ class OrderController extends Controller
 {
 
     public function generatePDF($id){
+
         $order = Order::find($id);
-  
-        $pdf = PDF::loadView('pdf', compact('user'));
+
+        if($order == null) {
+            return;
+        }
+
+        $items = $order->items();
+        $pdf = PDF::loadView('pdf.order', ['order' => $order]);
         return $pdf->download('invoice.pdf');
-  
+
     }
 
 }
