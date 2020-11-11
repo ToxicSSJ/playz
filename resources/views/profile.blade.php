@@ -98,7 +98,6 @@
                                     @endif
                                     @endforeach
                                 </ul>
-                                <a href="#" class="btn btn-warning mt-1">{{ __('audios.more_details') }}</a>
                             </div>
                         </div>
                         <br>
