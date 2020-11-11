@@ -98,6 +98,9 @@ return [
     'invoice' => 'Recibo',
     'total' => 'Total',
     'date' => 'Fecha',
+    'report' => 'Generar Reporte',
+    'order_number' => 'Order Number',
+    'total_cost' => 'Total Price',
 
     'phases' => [
         'phase' => 'Phase'

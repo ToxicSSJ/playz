@@ -6,22 +6,14 @@ use Illuminate\Http\Request;
 
 use App\Order;
 use PDF;
+use App;
 
 class OrderController extends Controller
 {
 
     public function generatePDF($id){
-
-        $order = Order::find($id);
-
-        if($order == null) {
-            return;
-        }
-
-        $items = $order->items();
-        $pdf = PDF::loadView('pdf.order', ['order' => $order]);
-        return $pdf->download('invoice.pdf');
-
+        $pdf = App::make('InvoicePDF');
+        return $pdf->generatePDF($id);
     }
 
 }

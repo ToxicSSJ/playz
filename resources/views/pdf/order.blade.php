@@ -23,12 +23,12 @@
         </tr>
         @foreach($order->items()->get() as $item)
         <tr>
-            <td>{{$item->id}}</td>
+            <td>{{$item->audio()->get()->first()->getTitle()}}</td>
             <td>{{$item->price}}</td>
         </tr>
         @endforeach
     </table>
-    <strong>{{ __('audios.total') }}: </strong>{{ $order->total }} - <strong>{{ __('audios.date') }}: </strong>{{ $order->created_at }}
+    <strong>{{ __('audios.total') }}: </strong>${{ $order->total }} - <strong>{{ __('audios.date') }}: </strong>{{ $order->created_at }}
 
 </body>
 
