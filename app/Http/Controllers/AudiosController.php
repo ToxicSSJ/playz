@@ -220,6 +220,7 @@ class AudiosController extends Controller
     {
         $order = new Order();
         $order->setTotal("0");
+        $order->setAuthor(Auth::user()->id);
         $order->save();
 
         $totalPrice = 0;
