@@ -137,7 +137,7 @@ class BundlesController extends Controller
 
         }
         
-        return back()->with('success','Bundle created successfully!');
+        return back()->with('success','¡Paquete creado de manera éxitosa!');
 
     }
 

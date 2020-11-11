@@ -1,7 +1,5 @@
 <?php
 
 return [
-
-    'profile' => 'Profile'
-
+    'profile' => 'Perfíl'
 ];
