@@ -88,6 +88,13 @@ return [
     'meetings' => 'Community Meetings',
     'place' => 'Place',
     'google_login' => 'Login with Google',
+    'charge' => 'Load Wallet',
+    'one_time' => 'one time',
+    'small' => 'Paquete Pequeño',
+    'medium' => 'Paquete Mediano',
+    'dj' => 'Paquete de DJ',
+    'credits' => 'creditos',
+    'current_credits' => 'Current Credits',
 
     'phases' => [
         'phase' => 'Phase'

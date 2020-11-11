@@ -69,6 +69,11 @@ class User extends Authenticatable
         $this->attributes['google_id'] = $googleid;
     }
 
+    public function setWallet($wallet)
+    {
+        $this->attributes['wallet'] = $wallet;
+    }
+
     public function getName() {
         return $this->attributes['name'];
     }
