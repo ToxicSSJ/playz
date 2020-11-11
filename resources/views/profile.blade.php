@@ -32,6 +32,7 @@
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-audios-tab" data-toggle="tab" href="#nav-audios" role="tab" aria-controls="nav-audios" aria-selected="true">Audios</a>
                             <a class="nav-item nav-link" id="nav-bundles-tab" data-toggle="tab" href="#nav-bundles" role="tab" aria-controls="nav-bundles" aria-selected="false">Bundles</a>
+                            <a class="nav-item nav-link" id="nav-orders-tab" data-toggle="tab" href="#nav-orders" role="tab" aria-controls="nav-orders" aria-selected="false">Orders</a>
                         </div>
                     </nav>
 
@@ -66,7 +67,22 @@
                         <br>
                         @endforeach
                     </div>
+                    
                     <div class="tab-pane fade" id="nav-bundles" role="tabpanel" aria-labelledby="nav-bundles-tab">
+                        @foreach($bundles as $bundle)
+                        <div class="card">
+                            <img class="card-img-top" src="{{ Storage::url($bundle->getCoverImage()) }}" height="300" width="50" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $bundle->getTitle() }}</h5>
+                                <p class="card-text">{{ $bundle->getDescription() }}.</p>
+                                <a href="{{route('bundle.show', $bundle->getId())}}" class="btn btn-warning mt-1">{{ __('audios.more_details') }}</a>
+                            </div>
+                        </div>
+                        <br>
+                        @endforeach
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-orders" role="tabpanel" aria-labelledby="nav-orders-tab">
                         @foreach($bundles as $bundle)
                         <div class="card">
                             <img class="card-img-top" src="{{ Storage::url($bundle->getCoverImage()) }}" height="300" width="50" alt="Card image cap">

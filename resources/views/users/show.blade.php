@@ -21,9 +21,8 @@
                         @if($user->isAdmin())
                             <span class="badge badge-danger align-center">{{ __('audios.staff') }}</span>
                         @endif
-                        {{ $user->getName() }}TEST TO KNOW IF THIS WORKS
+                        {{ $user->getName() }}
                     </h5>
-                    <h1>TEST TO KNOW IF THIS WORKS</h1>
                     <h6>
                         {{ $user->getStatus() }}
                     </h6>
